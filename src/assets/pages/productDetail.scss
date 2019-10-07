@@ -1,0 +1,19 @@
+.text-shadow-red{
+    text-shadow: 1px 1px 1px red;
+}
+
+.bg-contain{
+    height: 500px;
+    background-size: contain;
+    background-position: center ;
+    background-repeat: no-repeat;    
+    @include max-pad{
+        height: 400px;
+    }
+    @include max-mobile-md{
+        height: 350px;
+    }
+    @include max-mobile-sm{
+        height: 300px;
+    }
+} 

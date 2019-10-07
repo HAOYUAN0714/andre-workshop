@@ -1,0 +1,31 @@
+
+// 插件類
+@import '~bootstrap/scss/functions'; // 載入bootstrap function.scss 來啟用功能
+@import './helps/variables'; // 載入編輯的variables.scss
+@import '~bootstrap/scss/bootstrap'; // ~bootstrap 代表 node_module/bootstrap.scss
+@import './helps/media.scss'; //載入響應式設定
+
+html{
+    background-color: $dark;
+}
+
+
+
+// components
+@import './compoents/categories.scss';
+@import './compoents/navbar.scss';
+@import './compoents/search.scss';
+@import './compoents/cart.scss';
+@import './compoents/eventModal.scss';
+@import './compoents/gotop.scss';
+@import './compoents/dashboard/dashboard.scss';
+
+// layout
+@import './layout/header.scss';
+
+// pages
+@import './pages/checkout'  ;
+@import './pages/about.scss';
+@import './pages/productDetail.scss';
+@import './pages/products.scss';
+
