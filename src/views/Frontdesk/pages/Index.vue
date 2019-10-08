@@ -1,12 +1,12 @@
 <template>
-    <div>
-        <div class="container">
-            <Carousel></Carousel>
-            <Categories></Categories>
-        </div>
-        <ContactInfo></ContactInfo>
-        <EventModal></EventModal>
-    </div>
+	<div>
+		<div class="container">
+			<Carousel></Carousel>
+			<Categories></Categories>
+		</div>
+		<ContactInfo></ContactInfo>
+		<EventModal></EventModal>
+	</div>
 </template>
 
 <script>
@@ -16,16 +16,14 @@ import ContactInfo from '../../../components/Frontdesk/ContactInfo';
 import EventModal from '../../../components/Frontdesk/EventModal';
 import $ from 'jquery';
 
-
 export default {
-    components:{
-        Carousel,
-        Categories,
-        ContactInfo,
-        EventModal
-    },
+	components:{
+		Carousel,
+		Categories,
+		ContactInfo,
+		EventModal
+	},
 }
-
 
 </script>
 

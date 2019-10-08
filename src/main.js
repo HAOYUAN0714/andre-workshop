@@ -5,7 +5,7 @@ import App from './App.vue';
 import router from './router';
 import axios from 'axios';
 import VeeValidate from 'vee-validate'; // 表單驗證套件，http://vee-validate.logaretm.com/v2/guide/rules.html#after ，官方文件規則
-import zhTW from 'vee-validate/dist/locale/zh_TW' ;  // 載入vee-validate  繁體中文語系
+import zhTW from 'vee-validate/dist/locale/zh_TW' ; // 載入vee-validate  繁體中文語系
 import VueI18n from 'vue-i18n'; // 載入vue-i18n
 import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/vue-loading.css';
@@ -14,7 +14,6 @@ import 'bootstrap';
 import './bus' ;
 import currencyFilter from './fillters/currency';
 import timeStampFilter from './fillters/unixFormat';
-
 
 Vue.use(VueAxios, axios)
 Vue.use(Vuex);
@@ -42,7 +41,6 @@ Vue.filter('timeStamp',timeStampFilter); // 用全域方式註冊UNIX時間碼�
 axios.defaults.withCredentials = true; // 將後端的session 存入使用者的cookie
 /* eslint-disable no-new */
 
-
 new Vue({
   router,
   store,
@@ -51,26 +49,25 @@ new Vue({
 }).$mount('#app')
 
 
-router.beforeEach((to, from, next) => {  // router.beforeEach((to, from, next)，此方法在切換路由時會啟用
-      if(to.meta.requiresAuth){ // to 代表要連去的路由，當to.meta.requiresAuth 是 true 表示當目前要連上的路由需要進行驗證
-        const apiPath = process.env.VUE_APP_APIPATH ; // 表示從config/dev.env.js裡的APIPATH變數
-        const api = `${apiPath}/api/user/check` ; // 使用檢查用戶是否仍持續登入api
-        // API 伺服器路徑
-        // 申請的 API path
-        axios.post(api).then((response) => { // 特別注意這裡的函式不是在vue下執行，而是直接使用router的方法 所以不能用 this.$http.post ，而是直接用 axios.post
-          if(response.data.success){ // 當在登入狀態時，放行 next()
-              next();
-          }
-          else{ // 當不是在登入狀態時，連到login路由
-            next({
-              path:'/login'
-            })
-          }
-        }) 
-      }
-      else{   // 當to.meta.requiresAuth 不是 true 表示要連上此路由不需要進行驗證，可以直接放行
-        next();
-      }
-    
+router.beforeEach((to, from, next) => { // router.beforeEach((to, from, next)，此方法在切換路由時會啟用
+    if(to.meta.requiresAuth){ // to 代表要連去的路由，當to.meta.requiresAuth 是 true 表示當目前要連上的路由需要進行驗證
+      const apiPath = process.env.VUE_APP_APIPATH ; // 表示從config/dev.env.js裡的APIPATH變數
+      const api = `${apiPath}/api/user/check` ; // 使用檢查用戶是否仍持續登入api
+      // API 伺服器路徑
+      // 申請的 API path
+      axios.post(api).then((response) => { // 特別注意這裡的函式不是在vue下執行，而是直接使用router的方法 所以不能用 this.$http.post ，而是直接用 axios.post
+        if(response.data.success){ // 當在登入狀態時，放行 next()
+          next();
+        }
+        else{ // 當不是在登入狀態時，連到login路由
+          next({
+            path:'/login'
+          })
+        }
+      }) 
+    }
+    else{ // 當to.meta.requiresAuth 不是 true 表示要連上此路由不需要進行驗證，可以直接放行
+      next();
+    }
   }
 )

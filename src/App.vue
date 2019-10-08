@@ -8,11 +8,8 @@
 <script>
 import {mapGetters} from 'vuex'
 
-
 export default {
   name: 'App',
-  components: {
-  },
   computed:{
     ...mapGetters(['isLoading']),
   }

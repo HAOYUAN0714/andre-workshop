@@ -1,12 +1,12 @@
 <template >
-    <div class="bg-dark">
-        <Allert></Allert>
-        <Header></Header>
-        <Navbar></Navbar>
-        <router-view></router-view>
-        <Footer></Footer>
-        <Arrow></Arrow>
-    </div>
+	<div class="bg-dark">
+		<Allert></Allert>
+		<Header></Header>
+		<Navbar></Navbar>
+		<router-view></router-view>
+		<Footer></Footer>
+		<Arrow></Arrow>
+	</div>
 </template>
 
 
@@ -18,18 +18,16 @@ import Footer from '../../views/Frontdesk/layout/Footer';
 import Arrow from './GoTop';
 
 export default {
-    components:{
-        Header,
-        Allert,
-        Navbar,
-        Footer,
-        Arrow
-    },
+	components:{
+		Header,
+		Allert,	
+		Navbar,
+		Footer,
+		Arrow
+	},
 }
 </script>
-<style lang="scss">
 
-</style>
 
 
 

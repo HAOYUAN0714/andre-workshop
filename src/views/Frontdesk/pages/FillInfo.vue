@@ -220,7 +220,7 @@ export default {
     },
     data(){
         return{
-            form:{  //撈取要送出的表單資料
+            form:{ //撈取要送出的表單資料
                 user: {
                     name: '',
                     email:'' ,
@@ -247,11 +247,11 @@ export default {
                 $('#eventAlert').modal('show');
                    return
             }
-            else if( vm.isCoupon &  vm.$store.state.cartsModules.cartsData.total < 3000){ //如果以使用優惠券，卻因點選刪除商品導致商品總額低於 3000 ，就提醒客戶並中斷表單傳送
+            else if( vm.isCoupon & vm.$store.state.cartsModules.cartsData.total < 3000){ //如果以使用優惠券，卻因點選刪除商品導致商品總額低於 3000 ，就提醒客戶並中斷表單傳送
                 $('#warningAlert').modal('show');
                 return
             } 
-            vm.$store.dispatch('updateLoading',true);  // 在vuex管理下如果把updateLoading這段放在 if else 前面會造成無限循環錯誤，原因不明，但在cli2.0和3.0 時的專案沒有這種問題，可能是loading被預設為不能一直是開啟。
+            vm.$store.dispatch('updateLoading',true); // 在vuex管理下如果把updateLoading這段放在 if else 前面會造成無限循環錯誤，原因不明，但在cli2.0和3.0 時的專案沒有這種問題，可能是loading被預設為不能一直是開啟。
             const order = vm.form            
             this.$validator.validate().then((result) => { // vee-validate官方驗證判斷
                 if (result) {

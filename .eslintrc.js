@@ -9,5 +9,6 @@ module.exports = {
     "no-sparse-arrays": 2, //陣列中不允許出現空位置
     "no-extra-parens": 2, //不允許出現多餘的括號
     "no-var": 2, //使用let和const代替var
+    "no-multi-spaces": 2, //不允許多餘空格
   },  
 }
