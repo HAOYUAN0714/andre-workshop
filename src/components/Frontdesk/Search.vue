@@ -1,8 +1,8 @@
 <template>
 	<div class="search-container">
 		<form class="form-inline">
-		<div class="input-group">
-			<input class="form-control " type="search" placeholder="輸入商品關鍵字" aria-label="Search" v-model="searchContent" @input.prevent="showMatch" @keydown.prevent="clickToMatch">
+		<div class="input-group input-width-100">
+			<input class="form-control" type="search" placeholder="輸入商品關鍵字" aria-label="Search" v-model="searchContent" @input.prevent="showMatch" @keydown.prevent="clickToMatch">
 			<div class="input-group-append">
 			<button class="btn btn-outline-warning" type="button" id="button-addon2" @click.prevent="clickToMatch" ><i class="fas fa-search"></i></button>
 			</div>

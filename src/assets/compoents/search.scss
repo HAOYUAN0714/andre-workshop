@@ -1,19 +1,22 @@
 .search{
-    &-container{
-        position: relative;
-    }
-    &-result{
-        position: absolute;
-        z-index: 5;
-        background-color: $gray-300;
-        width: 76%;
-        
-    }
-    &-result-item{
-        &:hover{
-            background-color: $dark;
-            color: $danger;
-            cursor: pointer;
-        }
-    }
+	&-container{
+		position: relative;
+	}
+	&-result{
+		position: absolute;
+		z-index: 5;
+		background-color: $gray-300;
+		width: 76%;
+	}
+	&-result-item{
+		&:hover{
+			background-color: $dark;
+			color: $danger;
+			cursor: pointer;
+		}
+	}
+}
+
+.input-width-100{
+	width: 100% !important ;
 }

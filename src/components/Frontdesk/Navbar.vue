@@ -38,7 +38,7 @@
         <div class="col-4"><router-link class="font-icon" to="/products" :class="{'active': activeItem === 'products' }" @click.prevent=" activeItem = 'products' "><i class="fas fa-gem "></i><h6>名匠精品</h6> </router-link></div>
         <div class="col-4"><router-link class="font-icon" to="/event" :class="{'active': activeItem === 'event' }" @click.prevent=" activeItem = 'event' "><i class="fas fa-glass-cheers"></i><h6>最新活動</h6></router-link></div>
       </div >
-      <Search class="mt-2 " ></Search>
+      <Search class="mt-2" ></Search>
     </section>
   </div>
 </template>
