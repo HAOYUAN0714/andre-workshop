@@ -73,12 +73,11 @@ export default {
 		...mapGetters('cartsModules',['carts','cartsData','status','isdisabled']),
 	},
 	methods:{
-		...mapActions('cartsModules',['getCart','removeCart']),
+		...mapActions('cartsModules',['removeCart']),
 						
 	},
 	created(){
-		const vm = this;
-		vm.getCart();      
+		const vm = this;     
 	}    
 }
 </script>

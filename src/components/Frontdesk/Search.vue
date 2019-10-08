@@ -46,7 +46,6 @@ export default {
 		...mapGetters('productsModules',['allProducts']),
 	},
 	methods:{
-		...mapActions('productsModules',['getAllProduct']),
 		getMatch(){
 			const vm =this;
 			vm.searchMatch = vm.allProducts.filter(item=> item.title.match(vm.searchContent));
@@ -95,7 +94,7 @@ export default {
 	},
 	created(){
 		const vm = this;
-		vm.getAllProduct();
+		// vm.getAllProduct();
 	}    
 }
 </script>

@@ -150,7 +150,7 @@ export default {
 	},
 	
 	methods:{
-		...mapActions('productsModules',['getProducts','getAllProduct']),
+		...mapActions('productsModules',['getProducts']),
 		addtoCart(id,qty=1){
 			this.$store.dispatch('cartsModules/addtoCart',{id,qty});
 		},
@@ -165,7 +165,7 @@ export default {
 	created(){
 		const vm =this;
 		vm.getProducts();
-		vm.getAllProduct();
+		// vm.getAllProduct();
 		vm.categoryName = vm.$route.query.category || 'all'; //一般點擊所有商品時 categoryName 初始值同常為 'all' ，但當由其他頁面載入分類商品時， categoryName會是點擊分類裡的query設定值，此值一開始由route的props指向而來    
 	},
 }

@@ -51,9 +51,6 @@
 import {mapActions,mapGetters} from 'vuex';
 
 export default {
-	methods:{
-		...mapActions('productsModules',['getAllProduct']),        
-	},
 	computed: {
 		...mapGetters('productsModules',['allProducts']),
 		filterCategories(){ // 取得所有類別
@@ -61,13 +58,9 @@ export default {
 			const categoryArray = vm.allProducts.map(function(item){ // 得到只有分類名稱的陣列
 				return item.category;
 			})
-			// console.log(categoryArray);
 			return categoryArray.filter((item, index, array) => array.indexOf(item) === index); // 過濾重複類別
 		},
 	},
-	created() {
-		this.getAllProduct();
-	},    
 }
 </script>
 

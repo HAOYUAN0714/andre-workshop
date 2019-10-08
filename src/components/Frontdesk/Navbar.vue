@@ -3,10 +3,10 @@
     <section>  
       <nav class="navbar navbar-expand-md navbar-dark bg-secondary d-none d-md-block">
         <div class="container">
-        <router-link class="logo-font" to="/index"> <img src="https://i.postimg.cc/5t0Jrxrk/logo-sm-transparent.png" width="48px" height="48px" alt=""> <b>安德烈工坊</b> </router-link>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
+          <router-link class="logo-font" to="/index"> <img src="https://i.postimg.cc/5t0Jrxrk/logo-sm-transparent.png" width="48px" height="48px" alt=""> <b>安德烈工坊</b> </router-link>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
         <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
           <ul class="navbar-nav ">
             <li class="nav-item mr-3 text-lg-left text-center">
@@ -57,9 +57,6 @@ export default {
     components:{
       Search,
       Cart
-    },
-    methods:{
-      ...mapActions('cartsModules',['removeCart']),
     },
 }
 </script>
