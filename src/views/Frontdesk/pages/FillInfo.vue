@@ -37,6 +37,7 @@
                   aria-controls="collapseOne"
                 >
                   顯示購物車細節
+                  <i class="fas fa-hand-point-left text-warning ml-1 fa-lg"/>
                 </button>
               </h2>
             </div>
