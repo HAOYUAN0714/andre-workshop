@@ -47,7 +47,7 @@
           v-if="product.origin_price > 0"
           class="text-danger font-weight-bold"
         >
-          product.price | currency }}
+          {{ product.price | currency }}
         </h4>
         <h4 
           v-if="product.origin_price == 0"

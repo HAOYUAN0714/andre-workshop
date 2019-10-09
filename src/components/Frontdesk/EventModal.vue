@@ -22,7 +22,7 @@
           </button>
         </div>
         <div class="modal-body">
-          <p class="h3 text-danger text-center"> <b>工紡歡慶10周年，8折優惠券大放送!</b> </p>
+          <p class="h3 text-danger text-center"> <b>工坊歡慶10周年，8折優惠券大放送!</b> </p>
         </div>
         <div class="modal-footer">
           <button 

@@ -128,7 +128,7 @@
           結帳
         </router-link>
       </div>
-      <div v-else><h5 class="text-center text-danger"><b>購物車沒有商品!</b></h5 ></div>
+      <div v-else><h5 class="text-center text-danger"><b>沒有預定作業怎麼幹活!</b></h5 ></div>
     </div>
   </div>  
 </template>
