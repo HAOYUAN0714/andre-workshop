@@ -101,14 +101,14 @@ export default {
     }
   },
   mounted(){
-    const vm =this;
+    const vm = this ;
     vm.carouselSet() ;
   },  
   methods:{
     carouselSet(){
       $('.carousel').carousel({
         interval: 8000,
-        pause:  'hover'
+        pause: 'hover'
       })
     }
   },

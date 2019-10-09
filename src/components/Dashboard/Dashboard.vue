@@ -4,10 +4,13 @@
     <Alert/>
     <div class="container-fluid">
       <div class="row">
-        <Sidebar ></Sidebar>
-        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+        <Sidebar/>
+        <main 
+          class="col-md-9 ml-sm-auto col-lg-10 px-4"
+          role="main" 
+        >
           <!-- Dashboard主要內容 -->
-          <router-view></router-view>
+          <router-view/>
         </main>
       </div>
     </div>

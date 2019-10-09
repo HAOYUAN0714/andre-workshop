@@ -1,5 +1,5 @@
 module.exports = {
-  root: true, // 此項是用來告訴eslint找當前配置檔案不能往父級查詢
+  // root: true, // 此項是用來告訴eslint找當前配置檔案不能往父級查詢
   extends: 'plugin:vue/recommended',
   rules: {
     // 'no-mixed-spaces-and-tabs': 0,

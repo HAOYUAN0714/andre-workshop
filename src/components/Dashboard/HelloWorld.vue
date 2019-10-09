@@ -13,7 +13,7 @@ export default {
     }
   },
   methods:{
-   signOut(){
+  signOut(){
       const apiPath = process.env.VUE_APP_APIPATH ; // 表示從config/dev.env.js裡的APIPATH變數
       const api = `${apiPath}/logout` ; // 使用logout api
       const vm =this ;
