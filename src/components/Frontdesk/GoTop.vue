@@ -1,18 +1,21 @@
 <template>
-	<div>
-		<i class="fas fa-chevron-circle-up   arrow" @click.prevent="goTop"></i>        
-	</div>
+  <div>
+    <i 
+      class="fas fa-chevron-circle-up arrow" 
+      @click.prevent="goTop"
+    />       
+  </div>
 </template>
 
 <script>
 import $ from 'jquery';
 
 export default {
-	methods:{
-		goTop(){
-			$('html,body').animate({ scrollTop: 0 }, 'slow');
-		}
-	}
+  methods:{
+    goTop(){
+      $('html,body').animate({ scrollTop: 0 }, 'slow');
+    }
+  }
 }
 </script>
 

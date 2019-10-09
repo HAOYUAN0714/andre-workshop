@@ -1,14 +1,13 @@
 <template >
-	<div class="bg-dark">
-		<Allert></Allert>
-		<Header></Header>
-		<Navbar></Navbar>
-		<router-view></router-view>
-		<Footer></Footer>
-		<Arrow></Arrow>
-	</div>
+  <div class="bg-dark">
+    <Allert/>
+    <Header/>
+    <Navbar/>
+    <router-view/>
+    <Footer/>
+    <Arrow/>
+  </div>
 </template>
-
 
 <script>
 import Allert from '../Dashboard/AlertMessage';
@@ -18,13 +17,13 @@ import Footer from '../../views/Frontdesk/layout/Footer';
 import Arrow from './GoTop';
 
 export default {
-	components:{
-		Header,
-		Allert,	
-		Navbar,
-		Footer,
-		Arrow
-	},
+  components:{
+    Header,
+    Allert,	
+    Navbar,
+    Footer,
+    Arrow
+  },
 }
 </script>
 
