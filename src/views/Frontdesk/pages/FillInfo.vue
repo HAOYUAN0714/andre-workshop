@@ -1,211 +1,507 @@
 <template>
-	<section class="container">
-		<Processbar process = 'fillInfo'></Processbar>
-		<div class="my-5 row justify-content-center">
-			<div class="col-lg-6 col-md-8">
-				<section class="accordion card-header-shadow border-0 mb-3" id="accordionExample" >
-					<div  v-if="carts.length === 0" class="alert process-bg-danger text-center alert-rounded " role="alert">
-							<router-link to="/products" class="text-white">購物車沒有商品，前往舔加</router-link>
-					</div>
-					<div class="card bg-secondary" v-if="carts.length > 0"  >
-						<div class="card-header border bg-primary" id="headingOne">
-							<h2 class="mb-0 ">
-								<button class="btn btn-link text-white" 
-									type="button" 
-									data-toggle="collapse"
-									data-target="#collapseOne"
-									aria-expanded="true"
-									aria-controls="collapseOne">
-									顯示購物車細節
-								</button>
-							</h2>
-						</div>
-						<!-- 拿掉 .show 預設收起購物車 -->
-						<div id="collapseOne" class="collapse " aria-labelledby="headingOne"
-							data-parent="#accordionExample"
-						>
-							<div class="card-body bg-secondary">
-								<table class="table table-responsive-md">
-									<thead>
-										<tr class="text-warning">
-											<th class="align-middle " width="60" v-if="!isCoupon">刪除</th>
-											<th class="align-middle mobile-d-none" width="100">商品圖片</th>
-											<th class="d-md-none"></th>
-											<th class="align-middle">商品名稱</th>
-											<th class="align-middle" width="100">數量</th>
-											<th class="align-middle" width="80">小計</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr v-for="cart in carts" :key='cart.id' class="text-white">
-											<td class="align-middle" v-if="!isCoupon ">
-												<button class="btn btn-outline-danger" type="button" name="cartIn"
-													id="cartIn" data-title="remove" data-toggle="modal"
-													data-target="#goodsCancel"
-													@click.prevent="removeCart(cart.id)" 
-													>
-													<i class="fas fa-trash-alt " v-if="!status.loadingItem"></i>
-													<i class="fas fa-spinner fa-spin" v-if="status.loadingItem"></i>
-												</button>
-											</td>
-											<td class="align-middle mobile-d-none">
-												<img class="img-fluid"
-													:src="cart.product.imageUrl"
-													alt=""
-												>
-											</td>
-											<td class="d-md-none"></td>
-											<td class="align-middle">{{cart.product.title}}</td>
-											<td class="align-middle">{{cart.qty}}/{{cart.product.unit}}</td>
-											<td class="align-middle text-right">{{cart.total | currency}}</td>
-										</tr>
-									</tbody>
-									<tfoot>
-										<!-- 商品總額未達 3000 ，且未使用過優惠券-->
-										<tr class="text-white" v-if="cartsData.total<3000 & !isCoupon">
-											<td colspan="4" class="text-right"  ><b>運費</b></td>
-											<td class="text-right"><b>$ 60</b></td>
-										</tr>
-										<!-- 商品總額未達 3000，但有使用過優惠券，主要對應header購物車刪除功能 ，並讓colspan=3 -->
-										<tr class="text-white" v-if="cartsData.total<3000 & isCoupon">
-											<td colspan="3" class="text-right"  ><b>運費</b></td>
-											<td class="text-right"><b>$ 60</b></td>
-										</tr>                                        
-										<tr class="text-white" v-if="cartsData.total>=3000">
-											<td colspan="4" class="text-right" v-if="!isCoupon"><b>免運費</b></td>
-											<td colspan="3" class="text-right" v-if="isCoupon"><b>免運費</b></td>
-											<td class="text-right"><del><b>$ 60</b></del></td>
-										</tr> 
-										<tr class="text-danger" v-if="cartsData.total>=3000">
-											<td colspan="4" class="text-right" v-if="!isCoupon"><b>折扣金額</b> </td>
-											<td colspan="3" class="text-right" v-if="isCoupon"><b>折扣金額</b> </td>
-											<td class="text-right" v-if="!isCoupon"><b>0</b></td>
-											<td class="text-right" v-if="isCoupon"><b>{{cartsData.total - cartsData.final_total |currency}}</b></td>
-										</tr> 
-											<!-- 商品總額未達 3000 ，且未使用過優惠券-->                                                                               
-										<tr class="text-danger" v-if="cartsData.total<3000 & !isCoupon">
-											<td colspan="4" class="text-right" ><b>合計</b> </td>
-											<td class="text-right"><b>{{cartsData.total + 60 |currency}}</b></td>
-										</tr>
-										<!-- 商品總額未達 3000，但有使用過優惠券，主要對應header購物車刪除功能 ，並讓colspan=3 -->
-										<tr class="text-danger" v-if="cartsData.total<3000 & isCoupon ">
-											<td colspan="3" class="text-right" ><b>合計</b> </td>
-											<td class="text-right"><b>{{cartsData.total + 60 |currency}}</b></td>
-										</tr>                                        
-										<tr class="text-danger" v-if="cartsData.total>=3000">
-											<td colspan="4" class="text-right" v-if="!isCoupon"><b>合計</b> </td>
-											<td colspan="3" class="text-right" v-if="isCoupon"><b>合計</b> </td>
-											<td class="text-right" v-if="!isCoupon"><b>{{cartsData.total |currency}}</b></td>
-											<td class="text-right" v-if="isCoupon"><b>{{cartsData.final_total |currency}}</b></td>
-										</tr>   
-									</tfoot>
-								</table>
-							</div>
-						</div>
-						<!-- 狀態回饋 -->
-						<div class="alert  bg-warning text-center alert-rounded text-white mt-3" role="alert" v-if="cartsData.total<3000">商品總額還差{{3000-cartsData.total |currency}}可享免運費、優惠券功能</div>
-						<div class="alert  bg-dark text-center alert-rounded text-danger mt-3 font-weight-bold" role="alert" v-if="cartsData.total>=3000 & !isCoupon">提醒您，如有再新增商品請重新輸入代碼</div>
-						<div class="alert  bg-success text-center alert-rounded text-white mt-3 font-weight-bold" role="alert" v-if="cartsData.total>=3000 & isCoupon">已取得折扣</div>
-						<router-link to="/products" class="btn btn-danger mt-2" >繼續購物</router-link >
-					</div>
-				</section>  
-				<div class="input-group mb-3 " v-if="cartsData.total>=3000 & !isCoupon" >
-						<input type="text" class="form-control" placeholder="請輸入優惠碼" v-model='coupon_code' aria-label="Recipient's username" aria-describedby="button-addon2" >
-						<div class="input-group-append">
-								<button class="btn btn-outline-warning " type="button" id="button-addon2" @click='addCouponCode' >套用優惠碼</button>
-						</div>
-				</div>
-				<!-- 表單 -->
-				<form class="text-white" @submit.prevent='createOrder' v-if="carts.length > 0" >
-					<div class="form-group">
-					<label for="username"><span class="h5">收件人姓名</span> <span class="text-danger"><b>(必填)</b></span></label>
-					<input 
-						v-validate="'required'" 
-						type="text" class="form-control" 
-						name="name" id="username"
-						v-model="form.user.name"  
-						placeholder="輸入姓名"
-						:class="{'is-invalid':errors.has('name')}"
-					>
-					<span class="text-danger" v-if="errors.has('name')">請填寫您的真實姓名</span>
-					</div>
+  <section class="container">
+    <Processbar process = "fillInfo"/>
+    <div class="my-5 row justify-content-center">
+      <div class="col-lg-6 col-md-8">
+        <section 
+          id="accordionExample" 
+          class="accordion card-header-shadow border-0 mb-3" 
+        >
+          <div 
+            v-if="carts.length === 0" 
+            class="alert process-bg-danger text-center alert-rounded" 
+            role="alert"
+          >
+            <router-link 
+              to="/products" 
+              class="text-white"
+            >
+              購物車沒有商品，前往舔加
+            </router-link>
+          </div>
+          <div 
+            v-if="carts.length > 0"  
+            class="card bg-secondary" 
+          >
+            <div 
+              id="headingOne"
+              class="card-header border bg-primary" 
+            >
+              <h2 class="mb-0 ">
+                <button 
+                  class="btn btn-link text-white" 
+                  type="button" 
+                  data-toggle="collapse"
+                  data-target="#collapseOne"
+                  aria-expanded="true"
+                  aria-controls="collapseOne"
+                >
+                  顯示購物車細節
+                </button>
+              </h2>
+            </div>
+            <!-- 拿掉 .show 預設收起購物車 -->
+            <div 
+              id="collapseOne" 
+              class="collapse" 
+              aria-labelledby="headingOne"
+              data-parent="#accordionExample"
+            >
+              <div class="card-body bg-secondary">
+                <table class="table table-responsive-md">
+                  <thead>
+                    <tr class="text-warning">
+                      <th 
+                        v-if="!isCoupon"
+                        class="align-middle" 
+                        width="60" 
+                      >
+                        刪除
+                      </th>
+                      <th 
+                        class="align-middle mobile-d-none" 
+                        width="100"
+                      >
+                        商品圖片
+                      </th>
+                      <th class="d-md-none"/>
+                      <th class="align-middle">商品名稱</th>
+                      <th 
+                        class="align-middle" 
+                        width="100"
+                      >
+                        數量
+                      </th>
+                      <th 
+                        class="align-middle" 
+                        width="80"
+                      >
+                        小計
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr 
+                      v-for="cart in carts" 
+                      :key="cart.id" 
+                      class="text-white"
+                    >
+                      <td 
+                        v-if="!isCoupon"
+                        class="align-middle" 
+                      >
+                        <button 
+                          id="cartIn" 
+                          class="btn btn-outline-danger" 
+                          name="cartIn"
+                          type="button" 
+                          data-title="remove" 
+                          data-toggle="modal"
+                          data-target="#goodsCancel"
+                          @click.prevent="removeCart(cart.id)" 
+                        >
+                          <i 
+                            v-if="!status.loadingItem"
+                            class="fas fa-trash-alt" 
+                          />
+                          <i 
+                            v-if="status.loadingItem"
+                            class="fas fa-spinner fa-spin" 
+                          />
+                        </button>
+                      </td>
+                      <td class="align-middle mobile-d-none">
+                        <img 
+                          :src="cart.product.imageUrl"
+                          class="img-fluid"
+                          alt=""
+                        >
+                      </td>
+                      <td class="d-md-none"/>
+                      <td class="align-middle">{{ cart.product.title }}</td>
+                      <td class="align-middle">{{ cart.qty }}/{{ cart.product.unit }}</td>
+                      <td class="align-middle text-right">{{ cart.total | currency }}</td>
+                    </tr>
+                  </tbody>
+                  <tfoot>
+                    <!-- 商品總額未達 3000 ，且未使用過優惠券-->
+                    <tr 
+                      v-if="cartsData.total<3000 & !isCoupon"
+                      class="text-white" 
+                    >
+                      <td 
+                        class="text-right"
+                        colspan="4" 
+                      >
+                        <b>運費</b>
+                      </td>
+                      <td class="text-right"><b>$ 60</b></td>
+                    </tr>
+                    <!-- 商品總額未達 3000，但有使用過優惠券，主要對應header購物車刪除功能 ，並讓colspan=3 -->
+                    <tr 
+                      v-if="cartsData.total<3000 & isCoupon"
+                      class="text-white" 
+                    >
+                      <td 
+                        class="text-right"
+                        colspan="3" 
+                      >
+                        <b>運費</b>
+                      </td>
+                      <td class="text-right"><b>$ 60</b></td>
+                    </tr>                                        
+                    <tr 
+                      v-if="cartsData.total>=3000"
+                      class="text-white" 
+                    >
+                      <td 
+                        v-if="!isCoupon"
+                        class="text-right" 
+                        colspan="4" 
+                      >
+                        <b>免運費</b>
+                      </td>
+                      <td 
+                        v-if="isCoupon"
+                        class="text-right" 
+                        colspan="3" 
+                      >
+                        <b>免運費</b>
+                      </td>
+                      <td class="text-right"><del><b>$ 60</b></del></td>
+                    </tr> 
+                    <tr 
+                      v-if="cartsData.total>=3000"
+                      class="text-danger" 
+                    >
+                      <td 
+                        v-if="!isCoupon"
+                        class="text-right" 
+                        colspan="4"
+                      >
+                        <b>折扣金額</b>
+                      </td>
+                      <td 
+                        v-if="isCoupon"
+                        class="text-right" 
+                        colspan="3" 
+                      >
+                        <b>折扣金額</b>
+                      </td>
+                      <td 
+                        v-if="!isCoupon"
+                        class="text-right" 
+                      >
+                        <b>0</b>
+                      </td>
+                      <td 
+                        v-if="isCoupon"
+                        class="text-right" 
+                      >
+                        <b>{{ cartsData.total - cartsData.final_total |currency }}</b>
+                      </td>
+                    </tr> 
+                    <!-- 商品總額未達 3000 ，且未使用過優惠券-->                                                                               
+                    <tr 
+                      v-if="cartsData.total<3000 & !isCoupon"
+                      class="text-danger" 
+                    >
+                      <td 
+                        class="text-right" 
+                        colspan="4" 
+                      >
+                        <b>合計</b>
+                      </td>
+                      <td class="text-right"><b>{{ cartsData.total + 60 |currency }}</b></td>
+                    </tr>
+                    <!-- 商品總額未達 3000，但有使用過優惠券，主要對應header購物車刪除功能 ，並讓colspan=3 -->
+                    <tr 
+                      v-if="cartsData.total<3000 & isCoupon"
+                      class="text-danger" 
+                    >
+                      <td 
+                        class="text-right" 
+                        colspan="3" 
+                      >
+                        <b>合計</b> 
+                      </td>
+                      <td class="text-right"><b>{{ cartsData.total + 60 |currency }}</b></td>
+                    </tr>                                        
+                    <tr 
+                      v-if="cartsData.total>=3000"
+                      class="text-danger" 
+                    >
+                      <td 
+                        v-if="!isCoupon"
+                        class="text-right" 
+                        colspan="4" 
+                      >
+                        <b>合計</b> 
+                      </td>
+                      <td 
+                        v-if="isCoupon"
+                        class="text-right" 
+                        colspan="3" 
+                      >
+                        <b>合計</b> 
+                      </td>
+                      <td 
+                        v-if="!isCoupon"
+                        class="text-right" 
+                      >
+                        <b>{{ cartsData.total |currency }}</b>
+                      </td>
+                      <td 
+                        v-if="isCoupon"
+                        class="text-right" 
+                      >
+                        <b>{{ cartsData.final_total |currency }}</b>
+                      </td>
+                    </tr>   
+                  </tfoot>
+                </table>
+              </div>
+            </div>
+            <!-- 狀態回饋 -->
+            <div 
+              v-if="cartsData.total<3000"
+              class="alert bg-warning text-center alert-rounded text-white mt-3" 
+              role="alert" 
+            >
+              商品總額還差{{ 3000-cartsData.total |currency }}可享免運費、優惠券功能
+            </div>
+            <div 
+              v-if="cartsData.total>=3000 & !isCoupon"
+              class="alert bg-dark text-center alert-rounded text-danger mt-3 font-weight-bold" 
+              role="alert" 
+            >
+              提醒您，如有再新增商品請重新輸入代碼
+            </div>
+            <div 
+              v-if="cartsData.total>=3000 & isCoupon"
+              class="alert bg-success text-center alert-rounded text-white mt-3 font-weight-bold" 
+              role="alert" 
+            >
+              已取得折扣
+            </div>
+            <router-link 
+              to="/products" 
+              class="btn btn-danger mt-2" 
+            >
+              繼續購物
+            </router-link >
+          </div>
+        </section>  
+        <div 
+          v-if="cartsData.total>=3000 & !isCoupon" 
+          class="input-group mb-3" 
+        >
+          <input 
+            v-model="coupon_code" 
+            class="form-control" 
+            type="text" 
+            placeholder="請輸入優惠碼" 
+            aria-label="Recipient's username" 
+            aria-describedby="button-addon2" 
+          >
+          <div class="input-group-append">
+            <button 
+              id="button-addon2" 
+              class="btn btn-outline-warning" 
+              type="button" 
+              @click="addCouponCode" 
+            >
+              套用優惠碼
+            </button>
+          </div>
+        </div>
+        <!-- 表單 -->
+        <form 
+          v-if="carts.length > 0"
+          class="text-white" 
+          @submit.prevent="createOrder" 
+        >
+          <div class="form-group">
+            <label for="username"><span class="h5">收件人姓名</span> <span class="text-danger"><b>(必填)</b></span></label>
+            <input 
+              v-validate="'required'" 
+              id="username"
+              v-model="form.user.name"  
+              :class="{'is-invalid':errors.has('name')}"
+              class="form-control" 
+              type="text" 
+              name="name" 
+              placeholder="輸入姓名"
+            >
+            <span 
+              v-if="errors.has('name')"
+              class="text-danger" 
+            >
+              請填寫您的真實姓名
+            </span>
+          </div>
 
-					<div class="form-group">
-					<label for="useremail"><span class="h5">電子郵件</span> <span class="text-danger"><b>(必填)</b></span></label>
-					<input type="email" v-validate="'required|email'" class="form-control" name="email" id="useremail"
-							:class="{'is-invalid':errors.has('email')}"
-							v-model="form.user.email"  placeholder="請輸入 Email" 
-							>
-					<span class="text-danger" v-if="errors.has('email')">{{errors.first('email')}}</span>
-					</div>    
+          <div class="form-group">
+            <label for="useremail"><span class="h5">電子郵件</span> <span class="text-danger"><b>(必填)</b></span></label>
+            <input 
+              v-validate="'required|email'" 
+              id="useremail"
+              v-model="form.user.email"  
+              :class="{'is-invalid':errors.has('email')}"
+              class="form-control" 
+              type="email" 
+              name="email" 
+              placeholder="請輸入 Email" 
+            >
+            <span 
+              v-if="errors.has('email')"
+              class="text-danger" 
+            >
+              {{ errors.first('email') }}
+            </span>
+          </div>    
 
-					<div class="form-group">
-						<label for="usertel"><span class="h5">收件人電話</span> <span class="text-danger"><b>(必填)</b></span></label>
-						<input type="tel" v-validate="'required'" class="form-control" name='tel' id="usertel" :class="{'is-invalid':errors.has('tel')}" v-model="form.user.tel" placeholder="請輸入電話">
-						<span class="text-danger"
-							v-if="errors.has('tel')"
-						>請留下連絡電話
-						</span>
-					</div>
+          <div class="form-group">
+            <label for="usertel"><span class="h5">收件人電話</span> <span class="text-danger"><b>(必填)</b></span></label>
+            <input 
+              v-validate="'required'" 
+              id="usertel" 
+              v-model="form.user.tel" 
+              :class="{'is-invalid':errors.has('tel')}" 
+              class="form-control" 
+              name="tel" 
+              placeholder="請輸入電話" 
+              type="tel"
+            >
+            <span 
+              v-if="errors.has('tel')"
+              class="text-danger"
+            >
+              請留下連絡電話
+            </span>
+          </div>
 
-					<div class="form-group">
-					<label for="useraddress"><span class="h5">收件人地址</span> <span class="text-danger"><b>(必填)</b></span></label>
-					<input v-validate="'required'" type="text" 
-						:class="{'is-invalid':errors.has('address')}" 
-						class="form-control" 
-						name="address" 
-						id="useraddress" 
-						v-model="form.user.address"
-						placeholder="請輸入地址"
-					>
-					<span class="text-danger"  v-if="errors.has('address')">貨物送達地址務必填寫</span>
-					</div>
+          <div class="form-group">
+            <label for="useraddress"><span class="h5">收件人地址</span><span class="text-danger"><b>(必填)</b></span></label>
+            <input 
+              v-validate="'required'" 
+              id="useraddress" 
+              v-model="form.user.address"
+              :class="{'is-invalid':errors.has('address')}" 
+              class="form-control" 
+              type="text" 
+              name="address" 
+              placeholder="請輸入地址"
+            >
+            <span 
+              v-if="errors.has('address')" 
+              class="text-danger" 
+            >
+              貨物送達地址務必填寫
+            </span>
+          </div>
 
-					<div class="form-group">
-					<label for="comment"><span class="h5">留言</span></label>
-					<textarea name="" id="comment" class="form-control" cols="30" rows="10" v-model="form.message" placeholder="如有特殊要求請在此留言，例如:可收件的時段、訂製尺寸、訂製要求等"></textarea>
-					</div>
-					<div class="text-right">
-							<button class="btn btn-primary">送出訂單</button>
-					</div>
-				</form>
-			</div>    
-		</div> 
-		<!-- 滿3000未套用優惠券優惠提醒 modal  -->
-		<div class="modal mt-5" id="eventAlert" tabindex="-1" role="dialog" >
-			<div class="modal-dialog " role="document">
-				<div class="modal-content ">
-					<div class="modal-header bg-danger ">
-						<h5 class="modal-title text-white ">商品總額已滿3000，請使用優惠券</h5>
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-					<div class="modal-body text-right">
-						<button type="button" class="btn btn-outline-secondary mr-3" data-dismiss="modal">關閉</button>
-						<button type="button" class="btn btn-primary" @click.prevent="toEvent">前往領取優惠券</button>
-					</div>
-				</div>
-			</div>
-		</div>    
-		<!-- 因刪除商品導致未滿3000且已套用過優惠券提醒 modal  -->
-		<div class="modal mt-5" id="warningAlert" tabindex="-1" role="dialog" >
-			<div class="modal-dialog " role="document">
-				<div class="modal-content ">
-					<div class="modal-header bg-danger ">
-						<h5 class="modal-title text-white ">目前商品總額不足3000，無法取得優惠</h5>
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-					<div class="modal-body text-right">
-						<button type="button" class="btn btn-outline-secondary mr-3" data-dismiss="modal">關閉</button>
-						<button type="button" class="btn btn-primary" @click.prevent="toProducts">添加商品</button>
-					</div>
-				</div>
-			</div>
-		</div>             
-	</section>
+          <div class="form-group">
+            <label for="comment"><span class="h5">留言</span></label>
+            <textarea 
+              id="comment" 
+              v-model="form.message" 
+              class="form-control" 
+              cols="30" 
+              rows="10" 
+              placeholder="如有特殊要求請在此留言，例如:可收件的時段、訂製尺寸、訂製要求等"
+            />
+          </div>
+          <div class="text-right">
+            <button class="btn btn-primary">送出訂單</button>
+          </div>
+        </form>
+      </div>    
+    </div> 
+    <!-- 滿3000未套用優惠券優惠提醒 modal  -->
+    <div 
+      id="eventAlert" 
+      class="modal mt-5" 
+      tabindex="-1" 
+      role="dialog" 
+    >
+      <div 
+        class="modal-dialog "
+        role="document"
+      >
+        <div class="modal-content ">
+          <div class="modal-header bg-danger ">
+            <h5 class="modal-title text-white ">商品總額已滿3000，請使用優惠券</h5>
+            <button 
+              type="button" 
+              class="close" 
+              data-dismiss="modal" 
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body text-right">
+            <button 
+              type="button"
+              class="btn btn-outline-secondary mr-3" 
+              data-dismiss="modal"
+            >
+              關閉
+            </button>
+            <button 
+              type="button"
+              class="btn btn-primary"
+              @click.prevent="toEvent"
+            >
+              前往領取優惠券
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>    
+    <!-- 因刪除商品導致未滿3000且已套用過優惠券提醒 modal  -->
+    <div 
+      id="warningAlert" 
+      class="modal mt-5" 
+      tabindex="-1" 
+      role="dialog" 
+    >
+      <div 
+        class="modal-dialog " 
+        role="document"
+      >
+        <div class="modal-content ">
+          <div class="modal-header bg-danger ">
+            <h5 class="modal-title text-white ">目前商品總額不足3000，無法取得優惠</h5>
+            <button 
+              type="button" 
+              class="close" 
+              data-dismiss="modal" 
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body text-right">
+            <button 
+              type="button"
+              class="btn btn-outline-secondary mr-3" 
+              data-dismiss="modal">
+              關閉
+            </button>
+            <button 
+              type="button" 
+              class="btn btn-primary" 
+              @click.prevent="toProducts"
+            >
+              添加商品
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>             
+  </section>
 </template>
 
 <script>
@@ -236,6 +532,10 @@ export default {
     computed:{
         ...mapGetters('cartsModules',['carts','cartsData','status','isdisabled']),
     },
+    created(){
+      const vm =this;
+      vm.getCart();
+    },     
     methods:{
         ...mapActions('cartsModules',['getCart','removeCart']),
         createOrder(){
@@ -309,12 +609,7 @@ export default {
             $('#warningAlert').modal('hide');
             vm.$router.push('/products');
         },                                   
-    },
-    created(){
-        const vm =this;
-        vm.getCart();
-    },    
-
+    }, 
 }
 </script>
 
