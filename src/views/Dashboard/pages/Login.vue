@@ -1,18 +1,55 @@
 <template>
-    <form class="form-signin" @submit.prevent="signIn">
+  <form 
+    class="form-signin" 
+    @submit.prevent="signIn"
+  >
     <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-    <label for="inputEmail" class="sr-only">Email address</label>
-    <input type="email" id="inputEmail" class="form-control" v-model="user.username" placeholder="Email address" required autofocus>
-    <label for="inputPassword" class="sr-only">Password</label>
-    <input type="password" id="inputPassword" class="form-control" v-model="user.password" placeholder="Password" required>
-    <div class="checkbox mb-3">
-    <label>
-        <input type="checkbox" value="remember-me"> Remember me
+    <label 
+      class="sr-only"
+      for="inputEmail" 
+    >
+      Email address
     </label>
+    <input 
+      id="inputEmail" 
+      v-model="user.username" 
+      class="form-control" 
+      type="email" 
+      placeholder="Email address" 
+      required 
+      autofocus
+    >
+    <label 
+      for="inputPassword" 
+      class="sr-only"
+    >
+      Password
+    </label>
+    <input 
+      id="inputPassword" 
+      v-model="user.password" 
+      class="form-control" 
+      type="password" 
+      placeholder="Password" 
+      required
+    >
+    <div class="checkbox mb-3">
+      <label>
+        <input 
+          type="checkbox" 
+          value="remember-me"
+        > 
+        Remember me
+      </label>
     </div>
-    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+    <button 
+      class="btn btn-lg btn-primary btn-block" 
+      type="submit"
+    >
+      Sign in
+    </button>
     <p class="mt-5 mb-3 text-muted">&copy; 2017-2019</p>
-</form>
+  </form>
 </template>
 
 <script>
@@ -28,21 +65,21 @@ export default {
   },
   methods:{
     signIn(){
-        const apiPath = process.env.VUE_APP_APIPATH ; // 表示從config/dev.env.js裡的APIPATH變數
-        const api = `${apiPath}/admin/signin` ; // 使用login + 在後端增加session 的api 
-        const vm =this ;
-        // API 伺服器路徑
-        // 申請的 API path
-        this.$http.post(api,vm.user).then((response) => { //使用post傳送 user 去驗證 username 和 password 
-            console.log(response.data);
-            if(response.data.success){ // 當登入成功時，success 會是true
-                alert('登入成功');
-                this.$router.push('/admin'); // 登入成功後，頁面跳轉至首頁
-            }
-            else{
-                alert('登入失敗');
-            }
-        })        
+      const apiPath = process.env.VUE_APP_APIPATH ; // 表示從config/dev.env.js裡的APIPATH變數
+      const api = `${apiPath}/admin/signin` ; // 使用login + 在後端增加session 的api 
+      const vm =this ;
+      // API 伺服器路徑
+      // 申請的 API path
+      this.$http.post(api,vm.user).then((response) => { //使用post傳送 user 去驗證 username 和 password 
+        console.log(response.data);
+        if(response.data.success){ // 當登入成功時，success 會是true
+          alert('登入成功');
+          this.$router.push('/admin'); // 登入成功後，頁面跳轉至首頁
+        }
+        else{
+          alert('登入失敗');
+        }
+      })        
     }      
   }
 }
