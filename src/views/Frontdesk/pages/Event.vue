@@ -1,10 +1,10 @@
 <template>
   <div class="container">
     <div class="border border-warning rounded my-4 event-border">
-      <img 
-        src="https://i.postimg.cc/rpPTbtD4/event-banner-sm.jpg" 
-        class="d-block w-100 img-fluid" 
-      >   
+      <img
+        src="https://i.postimg.cc/rpPTbtD4/event-banner-sm.jpg"
+        class="d-block w-100 img-fluid"
+      >
       <div class="bg-secondary  text-white ">
         <h3 class="text-center p-3 text-warning"> <b>安德烈工坊 歡慶10周年</b> </h3>
         <div class="px-3">
@@ -19,48 +19,48 @@
           </p>
         </div>
         <div class="bg-dark p-3">
-          <div class="text-center"> 
-            <button 
+          <div class="text-center">
+            <button
               v-if="!isCliked"
-              class="btn btn-danger" 
-              type="button" 
-              @click.prevent="getCoupon" 
+              class="btn btn-danger"
+              type="button"
+              @click.prevent="getCoupon"
             >
               顯示優惠代碼
-            </button> 
-            <div 
-              v-if="isCliked & !codeGet" 
-              class="input-group" 
+            </button>
+            <div
+              v-if="isCliked & !codeGet"
+              class="input-group"
             >
-              <input 
-                id="codeId" 
-                v-model="couponCode" 
-                class="form-control" 
-                type="text" 
-                aria-label="Recipient's username" 
-                aria-describedby="button-addon2" 
+              <input
+                id="codeId"
+                v-model="couponCode"
+                class="form-control"
+                type="text"
+                aria-label="Recipient's username"
+                aria-describedby="button-addon2"
                 disabled
               >
               <div class="input-group-append">
-                <button 
-                  id="button-addon2" 
-                  :data-clipboard-text="couponCode" 
-                  class="btn btn-success copyBtn" 
-                  type="button" 
-                  @click="copy('.copyBtn')" 
+                <button
+                  id="button-addon2"
+                  :data-clipboard-text="couponCode"
+                  class="btn btn-success copyBtn"
+                  type="button"
+                  @click="copy('.copyBtn')"
                 >
                   複製代碼
                 </button>
               </div>
-            </div>                            
-            <router-link 
+            </div>
+            <router-link
               v-if="isCliked & codeGet"
-              to="/products" 
-              class="btn btn-danger" 
-              @click.prevent="getCoupon" 
+              to="/products"
+              class="btn btn-danger"
+              @click.prevent="getCoupon"
             >
               複製成功，繼續購物
-            </router-link> 
+            </router-link>
           </div>
         </div>
         <div class="bg-primary py-3">
@@ -75,34 +75,34 @@
           </div>
         </div>
       </div>
-    </div> 
+    </div>
   </div>
 </template>
 
 <script>
 import Clipboard from 'clipboard'; // 註冊clipboard.js套件複製剪貼簿
-import $ from 'jquery'
 
 export default {
-  data(){
-    return{
-      isCliked:false,
-      codeGet : false ,
-      couponCode:'LOL-10years-LOL-ShupUpAndGiveMeTheMoney',
-    }
+  data() {
+    return {
+      isCliked: false,
+      codeGet: false, // 確認是否已點擊複製
+      couponCode: 'LOL-10years-LOL-ShupUpAndGiveMeTheMoney', // 優惠碼
+    };
   },
-  methods:{
-    getCoupon(){
-      const vm =this;
+  methods: {
+    getCoupon() {
+      const vm = this;
       vm.isCliked = true;
     },
-    copy(bind){ // bind為綁定className或id 用來註冊copy按鈕
-      const vm =this;
-      const clipboard = new Clipboard(bind);
+    copy(bind) { // bind為綁定className或id 用來註冊copy按鈕
+      const vm = this;
+      const clipboard = new Clipboard(bind); // 給予綁定按鈕作為實現複製功能套件的目標
+      console.log(clipboard);
       vm.codeGet = true;
     },
-  }
-}
+  },
+};
 </script>
 
 <style lang="css">
@@ -110,4 +110,3 @@ export default {
     border-width: 10px !important;
   }
 </style>
-

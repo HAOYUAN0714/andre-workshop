@@ -43,7 +43,7 @@
                   class="nav-link text-lg-left text-center" 
                   to="/about"
                 >
-                  關於工紡
+                  關於工坊
                 </router-link>
               </li>
               <li class="nav-item mr-3">

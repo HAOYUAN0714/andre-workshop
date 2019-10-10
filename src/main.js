@@ -9,16 +9,17 @@ import zhTW from 'vee-validate/dist/locale/zh_TW' ; // 載入vee-validate  繁�
 import VueI18n from 'vue-i18n'; // 載入vue-i18n
 import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/vue-loading.css';
-import VueAxios from 'vue-axios' 
+import VueAxios from 'vue-axios'
 import 'bootstrap';
 import './bus' ;
 import currencyFilter from './fillters/currency';
 import timeStampFilter from './fillters/unixFormat';
 
+
 Vue.use(VueAxios, axios)
 Vue.use(Vuex);
 Vue.use(VueI18n); // 使用i18n
-const i18n = new VueI18n({ //建立新 VueI18n 
+const i18n = new VueI18n({ //建立新 VueI18n
   locale: 'zhTW',
   silentFallbackWarn: true
 });
@@ -64,7 +65,7 @@ router.beforeEach((to, from, next) => { // router.beforeEach((to, from, next)，
             path:'/login'
           })
         }
-      }) 
+      })
     }
     else{ // 當to.meta.requiresAuth 不是 true 表示要連上此路由不需要進行驗證，可以直接放行
       next();
