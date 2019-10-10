@@ -5,9 +5,9 @@
         <!-- 搜尋 -->
         <Search class="mr-3" />
         <!-- 購物車鈕 -->
-        <Cart/>           
-      </div>  
-    </div>      
+        <Cart/>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -16,10 +16,9 @@ import Search from '../../../components/Frontdesk/Search';
 import Cart from '../../../components/Frontdesk/Cart';
 
 export default {
-  components:{
+  components: {
     Search,
     Cart,
   },
-}
+};
 </script>
-
