@@ -1,17 +1,17 @@
 <template>
   <div class="message-alert">
-    <div 
-      v-for="(item, i) in messages" 
+    <div
+      v-for="(item, i) in messages"
       :key="i"
       :class="'alert-' + item.status"
       class="alert alert-dismissible"
     >
       {{ item.message }}
-      <button 
-        type="button" 
+      <button
+        type="button"
         class="close"
         aria-label="Close"
-        @click="removeMessage(i)" 
+        @click="removeMessage(i)"
       >
         <span aria-hidden="true">&times;</span>
       </button>
@@ -20,18 +20,13 @@
 </template>
 
 <script>
-import {mapGetters,mapActions} from 'vuex';
+import { mapGetters } from 'vuex';
 // 註解處為原本使用event bus 的寫法，現在是使用vuex的寫法
 
 export default {
   name: 'Navbar',
-  data(){
-    return {
-    // messages: [],
-    };
-  },
   computed: {
-    ...mapGetters(['messages']),   
+    ...mapGetters(['messages']),
   },
   created() {
     // const vm = this;
@@ -42,11 +37,11 @@ export default {
     // vm.updateMessage(message, status);
     // });
     // vm.$bus.$emit('message:push');
-  },  
+  },
   methods: {
     // ...mapActions('updateMessage','removeMessage','removeMessageWithTiming')
     updateMessage(message, status) {
-      this.$store.dispatch('updateMessage',{message, status})
+      this.$store.dispatch('updateMessage', { message, status });
       // const timestamp = Math.floor(new Date() / 1000);
       // this.messages.push({
       //     message,
@@ -57,11 +52,11 @@ export default {
       // console.log('回饋訊息資料',this.messages);
     },
     removeMessage(num) {
-      this.$store.dispatch('removeMessage',num)
+      this.$store.dispatch('removeMessage', num);
       // this.messages.splice(num, 1);
     },
     removeMessageWithTiming(timestamp) {
-      this.$store.dispatch('removeMessageWithTiming',timestamp)
+      this.$store.dispatch('removeMessageWithTiming', timestamp);
       // const vm = this;
       // setTimeout(() => {
       //     vm.messages.forEach((item, i) => {
@@ -73,8 +68,8 @@ export default {
       // },
     },
   },
-
 };
+
 </script>
 
 <style scope>

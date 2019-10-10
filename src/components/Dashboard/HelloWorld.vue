@@ -19,14 +19,14 @@ export default {
       const vm =this ;
       // API 伺服器路徑
       // 申請的 API path
-      this.$http.post(api).then((response) => { // 登出不需傳送 user 去驗證 username 和 password 
+      this.$http.post(api).then((response) => { // 登出不需傳送 user 去驗證 username 和 password
         console.log(response.data);
         if(response.data.success){ // 當登出成功時，success 會是true
             alert('登出成功');
             this.$router.push('/login'); // 登出成功後，頁面跳轉至登入頁
         }
-      })     
-    } 
+      })
+    }
   }
 }
 </script>
