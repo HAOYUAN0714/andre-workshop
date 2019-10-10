@@ -17,6 +17,7 @@ module.exports = {
     'no-console': 0,
     'no-debugger': 0,
     'no-alert': 0,
+    'no-param-reassign':0, // 允許對函式參數重新賦值，主要針對 vuex store mutation 進行修正
     // 消除相對路徑偵測bug
     "import/extensions": [0, "never", { "web.js": "never", "json": "never" }],
     "import/no-extraneous-dependencies": [0, { "devDependencies": true }],
