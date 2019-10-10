@@ -17,16 +17,12 @@ import Footer from '../../views/Frontdesk/layout/Footer';
 import Arrow from './GoTop';
 
 export default {
-  components:{
+  components: {
     Header,
-    Allert,	
+    Allert,
     Navbar,
     Footer,
-    Arrow
+    Arrow,
   },
-}
+};
 </script>
-
-
-
-

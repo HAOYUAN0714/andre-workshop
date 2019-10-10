@@ -4,18 +4,18 @@
 
 <script>
 export default {
-  data(){
-    return{
-      form:{ //撈取要送出的表單資料
+  data() {
+    return {
+      form: { // 撈取要送出的表單資料
         user: {
           name: '',
-          email:'' ,
+          email: '',
           tel: '',
-          address: ''
+          address: '',
         },
-        message:''
-      },            
-    }
-  }
-}
+        message: '',
+      },
+    };
+  },
+};
 </script>
