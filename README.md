@@ -8,6 +8,7 @@
 ### 優惠券功能 (加入金額限制，並對各種狀況增加訊息回饋)
 
 ## 使用技術
+
 ### Vue Cli 3 
 ### VueRouter
 ### ESlint 的 aribnb 優惠程式碼
@@ -17,6 +18,7 @@
 ### API ( 由六角學院提供 )
 
 ## 相關插件
+
 ### Vee-validate
 ### Vue-axios
 ### Vue-loading-overlay
