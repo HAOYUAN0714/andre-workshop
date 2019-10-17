@@ -11,7 +11,7 @@
 ```
 Vue Cli 3 
 VueRouter
-ESlint 的 aribnb 優惠程式碼
+ESlint 的 aribnb 優化程式碼
 RWD 響應式網頁設計
 Bootstrap4
 SCSS
