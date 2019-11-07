@@ -13,7 +13,7 @@
           v-for="item in orders"
           :key="item.id"
         >
-          <td>{{ item.create_at|timeStamp }}</td>
+          <td>{{ item.create_at | timeStamp }}</td>
           <td>{{ item.user.email }}</td>
           <td>
             <ul style="list-style-type:none;">

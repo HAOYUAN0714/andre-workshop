@@ -7,19 +7,19 @@ export default function (unixTimeStamp) {
   let minutes = timeStamp.getMinutes();
   let seconds = timeStamp.getSeconds();
   if (dd < 10) { // 讓個位數前加個0
-    dd = `0+ ${dd}`;
+    dd = `0${dd}`;
   }
   if (mm < 10) {
-    mm = `0+ ${mm}`;
+    mm = `0${mm}`;
   }
   if (hh < 10) {
-    hh = `0+ ${hh}`;
+    hh = `0${hh}`;
   }
   if (minutes < 10) {
-    minutes = `0+ ${minutes}`;
+    minutes = `0${minutes}`;
   }
   if (seconds < 10) {
-    seconds = `0+ ${seconds}`;
+    seconds = `0${seconds}`;
   }
   // var time = `${hh}:${minutes}:${seconds}`;
   const date = `${yyyy}-${mm}-${dd}`;

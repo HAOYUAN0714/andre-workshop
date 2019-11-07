@@ -7,7 +7,7 @@
           class="text-white"
           style="text-decoration:none"
         >
-          <div class="bg-cover  bg-hunter-suit bg-category">
+          <div class="bg-cover  bg-hunter-suit ">
             <div class="title-space  text-center font-weight-bold">
               <h3
                 class="title-none"
@@ -15,6 +15,9 @@
               >
                 {{ filterCategories[2] }}
               </h3>
+            </div>
+            <div class="bg-cover bg-category bg-hunter-change">
+              <div class="hover-color"></div>
             </div>
           </div>
         </router-link>
@@ -25,7 +28,7 @@
           class="text-white"
           style="text-decoration:none"
         >
-          <div class="bg-cover  bg-soul-armor bg-category">
+          <div class="bg-cover  bg-soul-armor">
             <div class="title-space  text-center font-weight-bold">
               <h3
                 class="title-none"
@@ -33,6 +36,9 @@
               >
                 {{ filterCategories[1] }}
               </h3>
+            </div>
+            <div class="bg-cover bg-category bg-armor-change">
+              <div class="hover-color"></div>
             </div>
           </div>
         </router-link>
@@ -43,7 +49,7 @@
           class="text-white"
           style="text-decoration:none"
         >
-          <div class="bg-cover  bg-hunter-weapon bg-category">
+          <div class="bg-cover bg-hunter-weapon">
             <div class="title-space  text-center font-weight-bold">
               <h3
                 class="title-none"
@@ -51,6 +57,9 @@
               >
                 {{ filterCategories[3] }}
               </h3>
+            </div>
+            <div class="bg-cover bg-category bg-hunter-weapon-change">
+              <div class="hover-color"></div>
             </div>
           </div>
         </router-link>
@@ -61,7 +70,7 @@
           class="text-white"
           style="text-decoration:none"
         >
-          <div class="bg-cover  bg-soul-weapon bg-category">
+          <div class="bg-cover  bg-soul-weapon">
             <div class="title-space  text-center font-weight-bold">
               <h3
                 class="title-none"
@@ -69,6 +78,9 @@
               >
                 {{ filterCategories[5] }}
               </h3>
+            </div>
+            <div class="bg-cover bg-category bg-soul-weapon-change">
+              <div class="hover-color"></div>
             </div>
           </div>
         </router-link>
@@ -79,7 +91,7 @@
           class="text-white"
           style="text-decoration:none"
         >
-          <div class="bg-cover bg-items bg-category">
+          <div class="bg-cover bg-items">
             <div class="title-space  text-center font-weight-bold">
               <h3
                 class="title-none"
@@ -87,6 +99,9 @@
               >
                 {{ filterCategories[4] }}
               </h3>
+            </div>
+            <div class="bg-cover bg-category bg-items-change">
+              <div class="hover-color"></div>
             </div>
           </div>
         </router-link>
@@ -97,7 +112,7 @@
           class="text-white"
           style="text-decoration:none"
         >
-          <div class="bg-cover bg-shield bg-category">
+          <div class="bg-cover bg-shield">
             <div class="title-space  text-center font-weight-bold">
               <h3
                 class="title-none"
@@ -105,6 +120,9 @@
               >
                 {{ filterCategories[0] }}
               </h3>
+            </div>
+            <div class="bg-cover bg-category bg-shield-change">
+              <div class="hover-color"></div>
             </div>
           </div>
         </router-link>
