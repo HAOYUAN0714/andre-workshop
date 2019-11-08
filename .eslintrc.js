@@ -22,6 +22,8 @@ module.exports = {
     "import/extensions": [0, "never", { "web.js": "never", "json": "never" }],
     "import/no-extraneous-dependencies": [0, { "devDependencies": true }],
     "import/no-unresolved": [0, { "ignore": ["antd-mobile"] }],
+    // crlf 抱錯
+    "linebreak-style": ["off", "windows"]
   },
 
 

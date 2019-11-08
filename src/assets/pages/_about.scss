@@ -1,0 +1,58 @@
+.bg-cover{
+    background-position: center center;
+    background-size: cover
+}
+.about-container{
+    overflow: hidden;
+    /* background-attachment: fixed; */
+}
+.container-h{
+    height: 600px;
+    @include max-mobile{
+        height: 520px;
+    }
+}
+
+
+.about-content{
+  // transform: translateY(-100%);
+  // transition: all 0.3s;
+  background-color: rgba(37, 31, 31, 0.8);
+  width: 50%;
+  @include min-pc{
+    width: 40%;
+  }
+  @include max-mobile{
+    width: 100%;
+  }
+}
+
+@media(max-width:767px){
+  .mobile-title-text{
+    font-size: 1.5rem;
+  }
+  .mobile-title-description{
+    font-size: 1.25rem;
+  }
+}
+
+@media(min-width:1025px) {
+  .content-title {
+    font-size: 2.5rem;
+  }
+}
+
+
+.content-font {
+  @include min-pad {
+    line-height: 28px;
+  }
+  @include max-mobile {
+    font-size: 1rem;
+  }
+}
+// 關閉效果中
+// .show-content{
+//     transform: translateY(0);
+//     transition: all 0.3s;
+// }

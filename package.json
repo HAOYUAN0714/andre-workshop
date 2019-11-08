@@ -20,6 +20,7 @@
     "font-awesome": "^4.7.0",
     "jquery": "^3.4.1",
     "popper.js": "^1.15.0",
+    "sweetalert": "^2.1.2",
     "vee-validate": "^2.1.1",
     "vue": "^2.6.10",
     "vue-axios": "^2.1.4",

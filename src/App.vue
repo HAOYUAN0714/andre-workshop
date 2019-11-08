@@ -1,9 +1,10 @@
 <template>
   <div id="app">
     <loading :active.sync="isLoading"
-      opacity="1"
+      :opacity=1
+      :z-index=2000
       background-color="#000"
-      color="#fff"
+      color=#fff
     />
     <router-view/>
   </div>

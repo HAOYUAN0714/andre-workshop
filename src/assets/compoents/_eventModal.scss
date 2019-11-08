@@ -1,0 +1,30 @@
+.modal{
+  &-max-width {
+    @media(min-width:360px){
+        max-width: 350px;
+    }
+    @media(min-width: 400px){
+        max-width: 400px;
+    }
+    @include min-mobile{
+        max-width: 600px;
+    }
+  }
+  &-img {
+    width: 250px;
+    @include max-pad {
+      width: 150px !important;
+    }
+  }
+  &-button-set {
+    border:0 !important;
+    width: 50% !important;
+    height: 100% !important;
+    border-radius: 0 !important;
+    margin: 0 !important;
+  }
+}
+
+.text-shadow {
+  text-shadow: 1px 1px black;
+}
