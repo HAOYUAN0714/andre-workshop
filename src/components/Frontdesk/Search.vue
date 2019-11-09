@@ -8,8 +8,8 @@
           type="search"
           placeholder="輸入商品關鍵字"
           aria-label="Search"
-          @input.prevent="showMatch"
-          @keydown.prevent="clickToMatch"
+          @input="showMatch"
+          @keydown.prevent.enter="clickToMatch"
         >
         <div class="input-group-append">
           <button
