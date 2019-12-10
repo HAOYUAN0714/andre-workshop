@@ -1,3 +1,8 @@
+# 前台
+
+## 首頁
+![image](https://github.com/HAOYUAN0714/andre-workshop/blob/gh-pages/%E9%A6%96%E9%A0%81.jpg?raw=true)
+
 # 功能實現
 ```
 商品搜尋功能
