@@ -21,9 +21,16 @@
 ```
 如果已滿 3000 但沒有使用優惠券
 ```
-![image](https://postimg.cc/pmD94BKg)
+![image](https://i.postimg.cc/JzFby604/300.png)
+
+## 後台部分
 
 ### 後台商品管理系統
+
+  · 可新增、刪除商品
+  · 上傳商品圖片
+  · 重新編輯商品
+
 ![image](https://i.postimg.cc/Wb4fRyJ5/image.png)
 
 ### 功能實現概述
