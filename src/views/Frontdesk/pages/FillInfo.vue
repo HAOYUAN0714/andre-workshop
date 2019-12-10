@@ -586,6 +586,7 @@ export default {
       vm.$store.dispatch('updateLoading', true);
       const api = `${apiPath}/api/${customPath}/coupon`; // 套用優惠券並重新計算總計價格Api
       this.$http.post(api, { data: coupon }).then((response) => {
+        console.log(response);
         if (response.data.success) {
           vm.getCart(); // 套用優惠券後重新更新購物車
           vm.$store.dispatch('cartsModules/getCart');
@@ -596,8 +597,8 @@ export default {
             status: 'success',
           });
         } else {
-          vm.$bus.$emit('message:push', response.data.message, 'danger');
-          vm.$$store.dispatch('updateMessage', {
+          vm.$store.dispatch('updateLoading', false);
+          vm.$store.dispatch('updateMessage', {
             message: response.data.message,
             status: 'danger',
           });

@@ -49,7 +49,7 @@ new Vue({
   render: (h) => h(App),
 }).$mount('#app');
 
-
+// 導航守衛
 router.beforeEach((to, from, next) => { // router.beforeEach((to, from, next)，此方法在切換路由時會啟用
   if (to.meta.requiresAuth) { // to 代表要連去的路由，當to.meta.requiresAuth 是 true 表示當目前要連上的路由需要進行驗證
     const apiPath = process.env.VUE_APP_APIPATH; // 表示從config/dev.env.js裡的APIPATH變數

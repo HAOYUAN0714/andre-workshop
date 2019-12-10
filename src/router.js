@@ -22,7 +22,7 @@ import FillInfo from '@/views/Frontdesk/pages/FillInfo';
 Vue.use(VueRouter);
 
 export default new VueRouter({
-  linkActiveClass: 'active', // 當點擊router-link顯示此路由頁面時， 啟用class:'active'
+  linkActiveClass: 'active', // 當點擊啟用 <router-link> 頁籤後， 在 <router-link> 加入class 'active' 如果沒有設定這段預設為 router-link-active ，這裡是用來切換被點擊的路由頁籤的文字顏色
   routes: [
     {
       path: '*', // 當連到不是我們自訂義的路由時
@@ -42,7 +42,8 @@ export default new VueRouter({
           name: 'Products',
           path: '/products',
           component: Products,
-          props: (route) => ({ category: route.query.category }), // 用props設定當前路由下要啟用的元件判斷參數
+          // 用props設定products路由下 to屬性的query ?category的值
+          props: (route) => ({ category: route.query.category }),
         },
         {
           name: 'About',
@@ -122,7 +123,6 @@ export default new VueRouter({
           path: '/customer_check/:orderId',
           name: 'CustomerCheck',
           component: CustomerCheck,
-
         },
       ],
     },

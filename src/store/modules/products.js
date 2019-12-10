@@ -22,7 +22,7 @@ export default {
     getProducts(context, page = 1) {
       const apiPath = process.env.VUE_APP_APIPATH; // 表示從config/dev.env.js裡的APIPATH變數
       const customPath = process.env.VUE_APP_CUSTOMPATH; // 表示從config/dev.env.js裡的CUSTOMPATH變數
-      context.commit('LOADING', true, { root: true });
+      context.commit('LOADING', true, { root: true }); // { root: true } 因 loading 是主要 index.js 檔案的內容，即全域，而目前此模組使用 namespcae: true 把 getter 、 mutaion 、 action 從全域變成區域，加入 root:true 能告訴模組此內容是來自全域的內容
       const api = `${apiPath}/api/${customPath}/products?page=${page}`; // 取得產品資訊的Api
       axios.get(api).then((response) => {
         if (response.data.success) {
