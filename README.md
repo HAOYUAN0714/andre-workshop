@@ -1,9 +1,9 @@
-# 前台
+## 前台部分
 
-## 首頁
+### 首頁
 ![image](https://github.com/HAOYUAN0714/andre-workshop/blob/gh-pages/%E9%A6%96%E9%A0%81.jpg?raw=true)
 
-# 功能實現
+## 功能實現
 ```
 商品搜尋功能
 商品購物車
@@ -12,7 +12,7 @@
 (加入金額限制，並對各種狀況增加訊息回饋)
 ```
 
-# 使用技術
+## 使用技術
 ```
 Vue Cli 3
 VueRouter
@@ -23,7 +23,7 @@ SCSS
 API串接 ( 由六角學院提供 )
 ```
 
-# 相關插件
+## 相關插件
 ```
 Vee-validate
 Vue-axios
