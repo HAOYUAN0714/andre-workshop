@@ -1,7 +1,7 @@
 ## 前台部分
 
 ### 首頁
-![image](https://github.com/HAOYUAN0714/andre-workshop/blob/gh-pages/%E9%A6%96%E9%A0%81.jpg?raw=true)
+![image](https://github.com/HAOYUAN0714/andre-workshop/blob/gh-pages/%E5%BE%8C%E5%8F%B0%E5%95%86%E5%93%81%E9%A4%A8%E8%A3%A1.png?raw=true)
 
 ## 功能實現
 ```
