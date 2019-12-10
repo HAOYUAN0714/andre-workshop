@@ -26,12 +26,17 @@
 ## 後台部分
 
 ### 後台商品管理系統
-
-  · 可新增、刪除商品
-  · 上傳商品圖片
-  · 重新編輯商品
-
+```
+可新增、刪除商品
+上傳商品圖片
+重新編輯商品
+```
 ![image](https://i.postimg.cc/Wb4fRyJ5/image.png)
+
+## 響應式設計
+![image](https://i.postimg.cc/Dwm7j5gG/RWD1.png)
+
+![image](https://i.postimg.cc/VkTm3MGV/RWD2.png)
 
 ### 功能實現概述
 ```
