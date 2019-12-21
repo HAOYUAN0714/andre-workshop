@@ -1,6 +1,7 @@
 <template>
   <div class="container">
     <div
+      :style="{backgroundImage:`url('${imageAndre}')`}"
       class="bg-secondary my-5  text-white bg-cover about-container container-h bg-about1"
     >
       <div class="about-content p-4  h-100">
@@ -19,6 +20,7 @@
       </div>
     </div>
     <div
+      :style="{backgroundImage:`url('${imageOrigin}')`}"
       class="bg-secondary my-5  text-white bg-cover about-container container-h bg-about2"
     >
       <div class="about-content p-4  h-100 ">
@@ -35,6 +37,7 @@
       </div>
     </div>
     <div
+      :style="{backgroundImage:`url('${imageLegend}')`}"
       class="bg-secondary my-5  text-white bg-cover about-container container-h bg-about3"
     >
       <div class="about-content p-4 h-100 ">

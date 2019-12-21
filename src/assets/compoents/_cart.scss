@@ -1,19 +1,16 @@
 .cart-bg-image{
-    width: 36px;
-    height: 36px;
-    // background-image: url(https://i.postimg.cc/sgBqXj8W/hammer1-yellow-sm.png);
-    // 背景圖片藥用的靜態檔案須放入 public 然後直接用 / 路徑設定
-    background-image: url(/icon/hammer1-yellow-sm.png);
-    background-repeat: no-repeat;
-    &:hover{
-      // background-image: url(https://i.postimg.cc/jSG9JV0F/hammer1-yellow-hover-sm.png);
-      background-image: url(/icon/hammer1-yellow-hover-sm.png);
-    }
+  width: 36px;
+  height: 36px;
+  background-image: url(https://i.postimg.cc/sgBqXj8W/hammer1-yellow-sm.png);
+  background-repeat: no-repeat;
+  &:hover{
+      background-image: url(https://i.postimg.cc/jSG9JV0F/hammer1-yellow-hover-sm.png);
+  }
 }
 
 .cart-list-width{
-    min-width: 350px;
-    @include max-mobile-sm{
-        min-width: 300px;
-    }
+  min-width: 350px;
+  @include max-mobile-sm{
+      min-width: 300px;
+  }
 }
