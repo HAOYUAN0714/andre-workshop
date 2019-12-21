@@ -1,0 +1,3 @@
+:style="{backgroundImage:`url('${imageAndre}')`}"
+:style="{backgroundImage:`url('${imageOrigin}')`}"
+:style="{backgroundImage:`url('${imageLegend}')`}"
