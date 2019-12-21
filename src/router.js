@@ -93,26 +93,27 @@ export default new VueRouter({
           path: 'production',
           name: 'Production',
           component: Production,
-          meta: { requiresAuth: true }, // 此路由需要登入帳號驗證
+          meta: { requiresAuth: true }, // 路由需要登入帳號驗證
         },
         {
           path: 'order',
           name: 'Order',
           component: Order,
-          meta: { requiresAuth: true }, // 此路由需要登入帳號驗證
+          meta: { requiresAuth: true },
         },
         {
           path: 'ticket',
           name: 'Ticket',
           component: Ticket,
-          meta: { requiresAuth: true }, // 此路由需要登入帳號驗證
+          meta: { requiresAuth: true },
         },
       ],
     },
-    { // 不須登入驗證的Dashboard 路由
+    {
       name: 'Dashboard_withoutValid', // 元件呈現的名稱
       path: '/dashboard', // 對應的虛擬路徑
       component: Dashboard, // 對應的元件
+      meta: { requiresAuth: true },
       children: [
         { // 此為模擬訂單路由，不需驗證登入
           path: '/customer_orders',

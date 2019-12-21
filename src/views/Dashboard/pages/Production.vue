@@ -461,3 +461,9 @@ export default { // 建立取得產品資訊的方法，並用created() 鉤子 �
   },
 };
 </script>
+
+<style lang="scss" scope>
+  html {
+    background-color: white;
+  }
+</style>

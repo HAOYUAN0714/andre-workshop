@@ -63,7 +63,7 @@
                 <div class="icon-container">
                   <img
                     class="icon"
-                    src="https://i.postimg.cc/k4gb3v7F/box-icon-y.png"
+                    src="../../../assets/images/icon/box-icon-y.png"
                   >
                 </div>
                 <h6>所有商品</h6>
@@ -85,37 +85,37 @@
                     <img
                       v-if="item === '磐石堅盾'"
                       class="icon"
-                      src="https://i.postimg.cc/wTsGJhDB/shield-icon-y.png"
+                      src="../../../assets/images/icon/shield-icon-y.png"
                     >
                     <img
                       v-if="item === '硬核鎧甲'"
                       class="icon"
-                      src="https://i.postimg.cc/c1VBYPsp/armor-icon-y.png"
+                      src="../../../assets/images/icon/armor-icon-y.png"
                     >
                     <img
                       v-if="item === '獵手套裝'"
                       class="icon"
-                      src="https://i.postimg.cc/rwqWNk7P/coat-y.png"
+                      src="../../../assets/images/icon/coat-y.png"
                     >
                     <img
                       v-if="item === '戰士鋒芒'"
                       class="icon"
-                      src="https://i.postimg.cc/ydswVWGT/sword-icon-y.png"
+                      src="../../../assets/images/icon/sword-icon-y.png"
                     >
                     <img
                       v-if="item === '機關兵器'"
                       class="icon"
-                      src="https://i.postimg.cc/hPN4Kb1b/1284-shotgun-512-y.png"
+                      src="../../../assets/images/icon/1284-shotgun-512-y.png"
                     >
                     <img
                       v-if="item === '救命稻草'"
                       class="icon"
-                      src="https://i.postimg.cc/GhmdFgqj/medicine-icon-y.png"
+                      src="../../../assets/images/icon/medicine-icon-y.png"
                     >
                     <img
                       v-if="item === '全新設計'"
                       class="icon"
-                      src="https://i.postimg.cc/4yn2dcQp/Very-Basic-Design-icon-y.png"
+                      src="../../../assets/images/icon/Very-Basic-Design-icon-y.png"
                     >
                   </div>
                   <h6>{{ item }}</h6>

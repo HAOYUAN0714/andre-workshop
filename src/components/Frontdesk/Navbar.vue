@@ -76,7 +76,7 @@
           class="logo-font-mobile"
         >
           <img
-            src="https://i.postimg.cc/5t0Jrxrk/logo-sm-transparent.png"
+            src="../../assets/images/dark/logo-sm-transparent.png"
             width="48px"
             height="48px"
           >

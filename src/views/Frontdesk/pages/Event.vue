@@ -2,7 +2,7 @@
   <div class="container">
     <div class="border border-warning rounded my-4 event-border">
       <img
-        src="https://i.postimg.cc/rpPTbtD4/event-banner-sm.jpg"
+        src="../../../assets/images/dark/event-banner-sm.jpg"
         class="d-block w-100 img-fluid"
       >
       <div class="bg-secondary  text-white ">

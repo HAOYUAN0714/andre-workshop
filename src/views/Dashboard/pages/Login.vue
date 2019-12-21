@@ -1,5 +1,5 @@
 <template>
-  <div style="height:100vh">
+  <div>
     <form
       class="form-signin"
       @submit.prevent="signIn"
@@ -77,7 +77,7 @@ export default {
         console.log(response.data);
         if (response.data.success) { // 當登入成功時，success 會是true
           alert('登入成功');
-          this.$router.push('/admin/production'); // 登入成功後，頁面跳轉至首頁
+          this.$router.push('/admin/production'); // 登入成功後，頁面跳轉至商品後台列表
         } else {
           alert('登入失敗');
         }

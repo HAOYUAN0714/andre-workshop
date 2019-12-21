@@ -6,10 +6,8 @@
 @import './helps/media.scss'; //載入響應式設定
 
 html{
-    background-color: $dark;
+  background-color: $dark;
 }
-
-
 
 // components
 @import './compoents/categories.scss';
@@ -20,8 +18,6 @@ html{
 @import './compoents/gotop.scss';
 @import './compoents/dashboard/dashboard.scss';
 
-// layout
-@import './layout/header.scss';
 
 // pages
 @import './pages/checkout'  ;

@@ -475,3 +475,9 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scope>
+  html {
+    background-color: white;
+  }
+</style>

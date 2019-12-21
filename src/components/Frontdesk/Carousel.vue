@@ -9,7 +9,7 @@
         <div class="carousel-inner">
           <div class="carousel-item header-carousel-item  active">
             <img
-              src="https://i.postimg.cc/ZYd9QFKF/banner4.jpg"
+              src="../../assets/images/dark/banner4.jpg"
               class="d-block w-100 img-fluid"
             >
             <div
@@ -27,7 +27,7 @@
           </div>
           <div class="carousel-item header-carousel-item ">
             <img
-              src="https://i.postimg.cc/DzSfXnSd/banner2.jpg"
+              src="../../assets/images/dark/banner2.jpg"
               class="d-block w-100 img-fluid"
             >
             <div
@@ -45,7 +45,7 @@
           </div>
           <div class="carousel-item header-carousel-item ">
             <img
-              src="https://i.postimg.cc/J0GqXZH5/banner3.jpg"
+              src="../../assets/images/dark/banner3.jpg"
               class="d-block w-100 img-fluid"
             >
             <div

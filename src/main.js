@@ -27,7 +27,6 @@ Vue.use(VeeValidate, { // 啟用validate並結合 i18n功能
   i18n,
   dictionary: {
     zhTW, // 套用vee-validate字典
-    // silentTranslationWarn: process.env.NODE_ENV === 'production'
   },
 });
 
@@ -39,7 +38,7 @@ Vue.component('Loading', Loading); // 用 Vue.component 全域載入loding功能
 Vue.filter('currency', currencyFilter); // 用全域方式註冊千分位filter
 Vue.filter('timeStamp', timeStampFilter); // 用全域方式註冊UNIX時間碼轉換filter
 
-axios.defaults.withCredentials = true; // 將後端的session 存入使用者的cookie
+axios.defaults.withCredentials = true; // 將後端的session 存入使用者的cookie。
 /* eslint-disable no-new */
 
 new Vue({
