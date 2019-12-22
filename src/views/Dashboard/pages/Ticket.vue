@@ -268,12 +268,20 @@ export default {
           console.log(response);
           $('#ticketModal').modal('hide'); // 關閉modal
           vm.getTickets();// 重新取得更新完的資料
-          this.$bus.$emit('message:push', response.data.message, 'success'); // 回傳成功訊息
+          // this.$bus.$emit('message:push', response.data.message, 'success'); // 回傳成功訊息
+          vm.$store.dispatch('updateMessage', {
+            message: response.data.message,
+            status: 'success',
+          });
         } else {
           console.log(response);
           $('#ticketModal').modal('hide'); // 關閉modal
           vm.getTickets(); // 重新取得更新完的資料
-          this.$bus.$emit('message:push', response.data.message, 'danger'); // 回傳錯誤訊息
+          // this.$bus.$emit('message:push', response.data.message, 'danger'); // 回傳錯誤訊息
+          vm.$store.dispatch('updateMessage', {
+            message: response.data.message,
+            status: 'danger',
+          });
         }
       });
     },

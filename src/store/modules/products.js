@@ -19,6 +19,7 @@ export default {
     },
   },
   actions: {
+    // 預設目前頁數為第1頁 ，每次切換頁面 page 都會改變，並以此 page 切換 api 請求的 query 參數 page 的值
     getProducts(context, page = 1) {
       const apiPath = process.env.VUE_APP_APIPATH; // 表示從config/dev.env.js裡的APIPATH變數
       const customPath = process.env.VUE_APP_CUSTOMPATH; // 表示從config/dev.env.js裡的CUSTOMPATH變數
@@ -27,7 +28,7 @@ export default {
       axios.get(api).then((response) => {
         if (response.data.success) {
           context.commit('PRODUCTS', response.data.products);
-          context.commit('LOADING', false, { root: true });
+          context.commit('LOADING', false, { root: true }); // root: true 表示調用的方法來自 index.js(主模組)
           context.commit('PAGINATION', response.data.pagination);
         }
       });

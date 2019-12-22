@@ -248,7 +248,9 @@ export default {
     filterCategories() { // 取得所有類別
       const vm = this;
       const categoryArray = vm.allProducts.map((item) => item.category); // 得到只有分類名稱的陣列;
-      return categoryArray.filter((item, index, array) => array.indexOf(item) === index); // 過濾重複類別
+      console.log(categoryArray);
+      // 過濾重複類別，indexOf只會取第一個被找到之索引
+      return categoryArray.filter((item, index, array) => array.indexOf(item) === index);
     },
     filterProducts() { // 過濾頁籤顯示
       const vm = this;

@@ -64,6 +64,7 @@ export default {
     },
   },
   methods: {
+    // 分頁數由後端回傳過來，我們主要處理的是 api 請求需藉由改變 query 參數 page 的值來切換請求獲取不同分頁顯示的內容
     updatePage(page) {
       this.$emit('emit-update-page', page);
     },

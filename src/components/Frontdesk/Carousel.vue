@@ -96,11 +96,11 @@
 import $ from 'jquery';
 
 export default {
-  data() {
-    return {
-      banner1: 'https://i.postimg.cc/wxfJKThg/banner1-sm.jpg',
-    };
-  },
+  // data() {
+  //   return {
+  //     banner1: 'https://i.postimg.cc/wxfJKThg/banner1-sm.jpg',
+  //   };
+  // },
   mounted() {
     const vm = this;
     vm.carouselSet();

@@ -1,5 +1,8 @@
 <template>
   <div class="message-alert">
+    <!-- message 出現的原理在於 v-for 的 messgaes 預設為空陣列，此時使用 v-for 範圍的標籤模板都不會顯示出來
+      只有觸發 updateMessage 才會 push 資料到 messages 裡此時 alert 才會顯示
+    -->
     <div
       v-for="(item, i) in messages"
       :key="i"
@@ -33,10 +36,10 @@ export default {
     // 自定義名稱 'messsage:push'
     // message: 傳入參數
     // status: 樣式，預設值為 warning
-    // vm.$bus.$on('message:push', (message, status = 'warning') => {
+    // vm.$bus.$on('message:push', (message, status = 'warning') => { // 使用 $on 監聽1個新的自訂方法
     // vm.updateMessage(message, status);
     // });
-    // vm.$bus.$emit('message:push');
+    // vm.$bus.$emit('message:push'); // alert 是由外部元件去觸發的，所以使用 $emit
   },
   methods: {
     // ...mapActions('updateMessage','removeMessage','removeMessageWithTiming')

@@ -1,5 +1,8 @@
 <template>
-  <section class="container">
+  <section
+      :class="{ emptyCartHeight : carts.length === 0}"
+      class="container"
+    >
     <Processbar process = "fillInfo"/>
     <div class="my-5 row justify-content-center">
       <div class="col-lg-6 col-md-8">
@@ -336,12 +339,12 @@
               name="name"
               placeholder="輸入姓名"
             >
-            <span
+            <b
               v-if="errors.has('name')"
               class="text-danger"
             >
-              請填寫您的真實姓名
-            </span>
+              請填寫收件人
+            </b>
           </div>
           <div class="form-group">
             <label for="useremail">
@@ -357,12 +360,12 @@
               name="email"
               placeholder="請輸入 Email"
             >
-            <span
+            <b
               v-if="errors.has('email')"
               class="text-danger"
             >
               {{ errors.first('email') }}
-            </span>
+            </b>
           </div>
           <div class="form-group">
             <label for="usertel">
@@ -378,12 +381,12 @@
               placeholder="請輸入電話"
               type="tel"
             >
-            <span
+            <b
               v-if="errors.has('tel')"
               class="text-danger"
             >
               請留下連絡電話
-            </span>
+            </b>
           </div>
           <div class="form-group">
             <label for="useraddress">
@@ -399,12 +402,12 @@
               name="address"
               placeholder="請輸入地址"
             >
-            <span
+            <b
               v-if="errors.has('address')"
               class="text-danger"
             >
               貨物送達地址務必填寫
-            </span>
+            </b>
           </div>
           <div class="form-group">
             <label for="comment"><span class="h5">留言</span></label>
@@ -559,9 +562,9 @@ export default {
         $('#warningAlert').modal('show');
         return;
       }
-      vm.$store.dispatch('updateLoading', true); // 在vuex管理下如果把updateLoading這段放在 if else 前面會造成無限循環錯誤，原因不明，但在cli2.0和3.0 時的專案沒有這種問題，可能是loading被預設為不能一直是開啟。
+      vm.$store.dispatch('updateLoading', true);
       const order = vm.form;
-      this.$validator.validate().then((result) => { // vee-validate官方驗證判斷
+      this.$validator.validate().then((result) => { // vee-validate方法，如果驗證的內容有 error result 會是 false
         if (result) {
           this.$http.post(api, { data: order }).then((response) => {
             vm.$store.dispatch('cartsModules/getCart');
@@ -624,4 +627,10 @@ export default {
     display: none;
   }
 }
+@media(min-width: 768px) {
+  .emptyCartHeight {
+    height: calc(100vh - 273.2px);
+  }
+}
+
 </style>

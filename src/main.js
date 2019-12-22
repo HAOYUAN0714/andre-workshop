@@ -53,9 +53,6 @@ router.beforeEach((to, from, next) => { // router.beforeEach((to, from, next)，
   if (to.meta.requiresAuth) { // to 代表要連去的路由，當to.meta.requiresAuth 是 true 表示當目前要連上的路由需要進行驗證
     const apiPath = process.env.VUE_APP_APIPATH; // 表示從config/dev.env.js裡的APIPATH變數
     const api = `${apiPath}/api/user/check`; // 使用檢查用戶是否仍持續登入api
-    // API 伺服器路徑
-    // 申請的 API path
-    // 特別注意這裡的函式不是在vue下執行，而是直接使用router的方法 所以不能用 this.$http.post ，而是直接用 axios.post
     axios.post(api).then((response) => {
       if (response.data.success) { // 當在登入狀態時，放行 next()
         next();

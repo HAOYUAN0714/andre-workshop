@@ -338,7 +338,7 @@ export default { // 建立取得產品資訊的方法，並用created() 鉤子 �
       products: [], // 撈取伺服器回傳給我們的產品資料
       pagination: {}, // 撈取伺服器回傳給我們的產品資料裡的分頁資料
       tempProduct: {}, // 用來撈 我們在產品新增、編輯、刪除 的modal的所有項目的input的值，
-      // 重點在於當我們點擊商品的新增、編輯、刪除 ，再接著點到另1個商品的
+      // 當我們點擊商品的新增、編輯、刪除 ，再接著點到另1個商品的
       // 新增、編輯、刪除 時都要改變tempProduct的值
       isNew: false, // 用來設定判斷 如果是點擊新增產品 isNew會是true ，如果點擊編輯 那當然點擊的商品是已存在的舊產品  isNew 就會是 false
       isLoading: false, // <loading :active.sync="isLoading" ></loading> 的變數，預設false為不啟用此功能
@@ -377,11 +377,18 @@ export default { // 建立取得產品資訊的方法，並用created() 鉤子 �
         if (response.data.success) {
           $('#delProductModal').modal('hide'); // 關閉modal
           vm.getProduct();// 重新取得更新完的資料
-          this.$bus.$emit('message:push', response.data.message, 'success'); // 回傳成功訊息
+          // this.$bus.$emit('message:push', response.data.message, 'success'); // 回傳成功訊息
+          vm.$store.dispatch('updateMessage', {
+            message: '刪除商品成功',
+            status: 'success',
+          });
         } else {
           $('#delProductModal').modal('hide'); // 關閉modal
           vm.getProduct();// 重新取得更新完的資料
-          this.$bus.$emit('message:push', response.data.message, 'danger'); // 回傳錯誤訊息
+          vm.$store.dispatch('updateMessage', {
+            message: '刪除商品成功失敗',
+            status: 'danger',
+          });
         }
       });
     },
@@ -397,25 +404,31 @@ export default { // 建立取得產品資訊的方法，並用created() 鉤子 �
       vm.status.fileUploading = true;
       vm.$http.post(url, formData, { // 使用POST方法傳送檔案到url，傳送檔案為formData
         header: {
-          'Content-Type': 'multipart/form-data', // 定義檔案的格式為form-data
+          'Content-Type': 'multipart/form-data', // sever 端要求的檔案格式為form-data
         },
       }).then((response) => {
         console.log('上傳檔案回傳結果', response.data); // 圖片上傳成功後 伺服器會回傳圖片網址 imageUrl
         vm.status.fileUploading = false;
         if (response.data.success) {
-          // vm.tempProduct.imageUrl = response.data.imageUrl;
-          // 使用註解方法賦值，下面console 會發現 vm.tempProduct 並沒有 set() get() 方法可以使用，
-          // 這表示這份資料並沒有雙向綁定
-          // console.log(vm.tempProduct);
+          // vm.tempProduct.imageUrl = response.data.imageUrl; 這裡直接使用賦值改變屬性值無法正確雙向綁定，所以使用 set 的方法
           vm.$set(vm.tempProduct, 'imageUrl', response.data.imageUrl); // 使用Vue.set方法達到雙向綁定 ，vm.$set(物件,物件的屬型/key,要設定的值)
-          this.$bus.$emit('message:push', response.data.message, 'success'); // 回傳成功訊息
+          // this.$bus.$emit('message:push', response.data.message, 'success'); // 回傳成功訊息
+          console.log(response);
+          vm.$store.dispatch('updateMessage', {
+            message: '上傳圖片成功',
+            status: 'success',
+          });
         } else {
-          this.$bus.$emit('message:push', response.data.message, 'danger'); // 回傳錯誤訊息
+          // this.$bus.$emit('message:push', response.data.message, 'danger'); // 回傳錯誤訊息
+          vm.$store.dispatch('updateMessage', {
+            message: '上傳圖片失敗',
+            status: 'danger',
+          });
         }
       });
     },
     openModal(isNew, item) {
-      if (isNew) { // 這是參數的isNew 並不是我們元件data return 的 this.isNew
+      if (isNew) {
         this.tempProduct = {}; // 如果是點擊新增產品 this.tempProduct 為空陣列 也就是modal 裡的input 都把它變成空值
         this.isNew = true; // 新增產品所以 isNew 為 true
       } else {
@@ -434,27 +447,35 @@ export default { // 建立取得產品資訊的方法，並用created() 鉤子 �
       vm.tempProduct = { ...item };
       $('#delProductModal').modal('show');
     },
-    updateProduct() {
+    updateProduct() { // 新增與編輯是共用同 1 個 modal ，而確認按鈕必須使用不同的方法
       const apiPath = process.env.VUE_APP_APIPATH; // 表示從config/dev.env.js裡的APIPATH變數
       const customPath = process.env.VUE_APP_CUSTOMPATH; // 表示從config/dev.env.js裡的CUSTOMPATH變數
       const vm = this;
-      let httpMethod = 'post';
+      let httpMethod = 'post'; // 新增商品的確認紐使用 post "新增資料"
       let api = `${apiPath}/api/${customPath}/admin/product`; // 商品建立api
       if (!vm.isNew) { // 如果isNew是false標示為編輯產品 ，需修改api為編輯產品用的api
         api = `${apiPath}/api/${customPath}/admin/product/${vm.tempProduct.id}`; // /api/:api_path/admin/product/:id 的id是 tempProduct 裡的 id
-        httpMethod = 'put'; // 修改 http方法為 put
+        httpMethod = 'put'; // 編輯商品的確認紐使用 put "更新資料"
       }
-      // 將新增產品傳送到後端伺服器 ， 因驗證api的物件外層還有個data 所以用 {data:vm.tempProduct} 包裹物件內容
+      // server 要求傳送資料格式為 { data: 商品資料 }
       this.$http[httpMethod](api, { data: vm.tempProduct }).then((response) => {
         console.log(response.data);
         if (response.data.success) { // 如果新增產品成功
           $('#productModal').modal('hide'); // 關閉modal
           vm.getProduct();// 重新取得更新完的資料
-          this.$bus.$emit('message:push', response.data.message, 'success'); // 回傳成功訊息
+          // this.$bus.$emit('message:push', response.data.message, 'success'); // 回傳成功訊息
+          vm.$store.dispatch('updateMessage', {
+            message: response.data.message,
+            status: 'success',
+          });
         } else {
           $('#productModal').modal('hide'); // 關閉modal
           vm.getProduct(); // 重新取得更新完的資料
-          this.$bus.$emit('message:push', response.data.message, 'danger'); // 回傳錯誤訊息
+          // this.$bus.$emit('message:push', response.data.message, 'danger'); // 回傳錯誤訊息
+          vm.$store.dispatch('updateMessage', {
+            message: response.data.message,
+            status: 'danger',
+          });
         }
       });
     },

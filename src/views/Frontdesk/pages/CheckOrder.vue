@@ -220,9 +220,10 @@ export default {
       const apiPath = process.env.VUE_APP_APIPATH; // 表示從config/dev.env.js裡的APIPATH變數
       const customPath = process.env.VUE_APP_CUSTOMPATH; // 表示從config/dev.env.js裡的CUSTOMPATH變數
       vm.isLoading = true;
-      const api = `${apiPath}/api/${customPath}/order/${vm.orderId}`; // 取得產品資訊的Api + 取得依照頁碼顯示對應的產品資訊
+      const api = `${apiPath}/api/${customPath}/order/${vm.orderId}`; // 取得送出的訂單資料
       this.$http.get(api).then((response) => {
         vm.order = response.data.order;
+        // console.log(vm.order);
         vm.products = response.data.order.products;
         vm.user = response.data.order.user;
         vm.isLoading = false;
@@ -237,7 +238,11 @@ export default {
       this.$http.post(api).then((response) => {
         if (response.data.success) {
           vm.getOrder(); // 結帳完重新整理
-          vm.$bus.$emit('message:push', response.data.message, 'success');
+          // vm.$bus.$emit('message:push', response.data.message, 'success');
+          vm.$store.dispatch('updateMessage', {
+            message: response.data.message,
+            status: 'success',
+          });
         }
         vm.isLoading = false;
       });

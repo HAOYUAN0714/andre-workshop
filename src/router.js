@@ -26,11 +26,12 @@ export default new VueRouter({
   routes: [
     {
       path: '*', // 當連到不是我們自訂義的路由時
-      redirect: '/index', // 重新指向路由回首頁，也是我們一開始開啟的畫面
+      redirect: '/index', // 重新指向路由回首頁
     },
     {
       name: 'Frontdesk',
       path: '/frontdesk',
+      redirect: '/index',
       component: Frontdesk,
       children: [
         {
@@ -88,6 +89,7 @@ export default new VueRouter({
       name: 'Dashboard', // 元件呈現的名稱
       path: '/admin', // 對應的虛擬路徑
       component: Dashboard, // 對應的元件
+      meta: { requiresAuth: true },
       children: [
         {
           path: 'production',
@@ -115,15 +117,17 @@ export default new VueRouter({
       component: Dashboard, // 對應的元件
       meta: { requiresAuth: true },
       children: [
-        { // 此為模擬訂單路由，不需驗證登入
+        {
           path: '/customer_orders',
           name: 'CustomerOrders',
           component: CustomerOrders,
+          meta: { requiresAuth: true },
         },
-        { // 此為訂單送出結帳頁面
+        {
           path: '/customer_check/:orderId',
           name: 'CustomerCheck',
           component: CustomerCheck,
+          meta: { requiresAuth: true },
         },
       ],
     },
