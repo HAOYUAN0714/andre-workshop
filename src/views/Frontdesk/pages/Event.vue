@@ -9,7 +9,7 @@
         <h3 class="text-center p-3 text-warning"> <b>安德烈工坊 歡慶10周年</b> </h3>
         <div class="px-3">
           <h5><b>活動說明</b></h5>
-          <h6 class="text-danger"><b>活動期間: 2019 / 9 / 26 ~ 2019 / 12 / 31</b></h6>
+          <h6 class="text-danger"><b>活動期間: 2020 / 01 / 01 ~ 2020 / 04 / 30</b></h6>
           <p >
             本次活動將所有商品以更實惠的價格重新上架，新的價格於活動結束後繼續沿用，不會因為活動結束而調回原價 !
             不只如此，活動期間可於本活動頁面下方免費領取8折優惠券代碼，並在購物車加入商品的總金額合計
@@ -57,7 +57,6 @@
               v-if="isCliked & codeGet"
               to="/products"
               class="btn btn-danger"
-              @click.prevent="getCoupon"
             >
               複製成功，繼續購物
             </router-link>
